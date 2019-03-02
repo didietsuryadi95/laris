@@ -56,5 +56,4 @@
     name: memcached
     state: present
     update_cache: yes
-  notify: Restart Memcache
   when : (app_role != "production")
