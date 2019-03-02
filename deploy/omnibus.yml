@@ -1,6 +1,6 @@
 ---
 - hosts:
-    - testiomo-omnibus
+    - testimo-omnibus
 
   vars_files:
     - environments/vault_vars.yml
