@@ -31,7 +31,7 @@
       - libwebp-dev
       - git
       - postgresql-client-common
-      - nodejs-legacy
+      # - nodejs-legacy
       #- python3-psycopg2
       # - python3-virtualenv
       # - virtualenv

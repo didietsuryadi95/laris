@@ -4,4 +4,3 @@
     src: /srv/{{ app_name }}/uwsgi.ini
     dest: /etc/uwsgi/vassels/{{ app_name }}.ini
     state: link
-  notify: Reload Vassel
