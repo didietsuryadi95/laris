@@ -1,0 +1,52 @@
+{% extends "layout_offer.html" %}
+{% load i18n %}
+{% load product_tags %}
+
+{% block title %}
+    {% trans "Sale" %} | {{ offer.name }} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="d-flex between-xs">
+        <ul class="gdn-breadcrumb">
+            <li>
+                <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+            </li>
+            <li>
+                <a href="/offers/">{% trans "Sale" %}</a>
+            </li>
+            <li class="active">
+                {{ offer.name }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block headertext %}
+{% endblock %}
+
+{% block content %}
+    {% if not offer.is_available %}
+        {% with "Maaf, Penawaran sudah tidak tersedia... Yuk temukan lagi produk insiprasi kamu" as wording %}
+            {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Temukan Lagi" id="product-list-not-found" image="product-not-found.png" grid="col-lg-7" %}
+        {% endwith %}
+    {% endif %}
+
+    {% if products %}
+        <section id="product-list">
+            <div class="row">
+                {% for product in offer.products %}
+                    <div class="col-lg-3 col-sm-6 col-xs-6 with-margin-bottom">
+                        {% render_product product %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% include "partials/pagination.html" %}
+        </section>
+    {% else %}
+        {% with "Maaf, Produk Tidak Tersedia... Yuk temukan lagi produk insiprasi kamu" as wording %}
+            {% include "partials/data-not-found.html" with id="product-list-not-found" url="/"  wording=wording button_name="Temukan Lagi" id="product-list-not-found" image="product-not-found.png" grid="col-lg-7" %}
+        {% endwith %}
+    {% endif %}
+
+{% endblock content %}

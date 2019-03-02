@@ -1,0 +1,44 @@
+---
+  - name: Set home directory
+    shell: echo $HOME
+    become: yes
+    become_user: vagrant
+    register: home_directory
+
+  - name: Set private key
+    copy:
+      src: files/deployment.key
+      dest: "{{ home_directory.stdout }}/.ssh/id_rsa"
+      owner: vagrant
+      group: vagrant
+      mode: 0600
+
+  - name: Disable SSH host key checking
+    file:
+      path: "{{ home_directory.stdout }}/.ssh/config"
+      state: touch
+      owner: vagrant
+      group: vagrant
+  - blockinfile:
+      dest: "{{ home_directory.stdout }}/.ssh/config"
+      block: |
+        Host *
+          StrictHostKeyChecking no
+      marker: '# {mark} ANSIBLE MANAGED BLOCK'
+      create: yes
+      insertafter: EOF
+      state: present
+
+  - name: Initialization submodule
+    shell: git submodule init
+    become: yes
+    # become_user: "{{ git_user }}"
+
+  - name: Update submodule when exist
+    shell: git submodule foreach git pull origin master
+    become: yes
+    # become_user: "{{ git_user }}"
+
+  - name: Update submodule when exist from remote
+    shell: git submodule update --recursive --remote
+    become: yes

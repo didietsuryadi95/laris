@@ -1,0 +1,30 @@
+[submodule "deploy/roles/apps/newrelic"]
+	path = deploy/roles/apps/newrelic
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-newrelic
+[submodule "deploy/roles/apps/rabbitmq"]
+	path = deploy/roles/apps/rabbitmq
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-rabbitmq
+[submodule "deploy/roles/apps/python"]
+	path = deploy/roles/apps/python
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-python
+[submodule "deploy/roles/apps/npm"]
+	path = deploy/roles/apps/npm
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-npm
+[submodule "deploy/roles/apps/nginx"]
+	path = deploy/roles/apps/nginx
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-nginx
+[submodule "deploy/roles/apps/uwsgi-emperor"]
+	path = deploy/roles/apps/uwsgi-emperor
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-uwsgi-emperor
+[submodule "deploy/roles/apps/solr"]
+	path = deploy/roles/apps/solr
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-solr
+[submodule "deploy/roles/apps/postgresql"]
+	path = deploy/roles/apps/postgresql
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-postgresql
+[submodule "deploy/roles/lang/java"]
+	path = deploy/roles/lang/java
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-lang-java
+[submodule "deploy/roles/common/ubuntu-bionic"]
+	path = deploy/roles/common/ubuntu-bionic
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-common-ubuntu-bionic

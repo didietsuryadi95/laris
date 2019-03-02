@@ -1,0 +1,11 @@
+---
+git_user: vagrant
+git_submodule_url:
+  - { name: 'ansible-role-solr', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-solr'}
+  - { name: 'ansible-role-nginx', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-nginx'}
+  - { name: 'ansible-role-npm', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-npm' }
+  - { name: 'ansible-role-postgresql', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-postgresql' }
+  - { name: 'ansible-role-uwsgi-emperor', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-uwsgi-emperor' }
+  - { name: 'ansible-role-common-ubuntu-bionic', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-common-ubuntu-bionic' }
+  - { name: 'ansible-role-lang-java', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-lang-java'}
+  - { name: 'ansible-role-solr', url: 'gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-solr'}

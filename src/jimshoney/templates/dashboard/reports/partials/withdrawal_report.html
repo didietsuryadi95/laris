@@ -1,0 +1,127 @@
+{% extends 'dashboard/reports/index.html' %}
+{% load currency_filters %}
+{% load i18n %}
+{% load utils_tags %}
+{% load function_tags %}
+
+{% block report %}
+    <style>
+        th{text-align: center}
+        td {
+            white-space: nowrap;
+        }
+        .withscroll {
+            width: 100%;
+            overflow-x: scroll;
+            white-space: nowrap;
+        }
+    </style>
+    <div class="withscroll">
+        <table class="table table-striped table-bordered table-hover">
+            {% if objects %}
+                <tr>
+                    <th colspan="7">Order Transaction</th>
+                    <th colspan="8">Ipay Fee</th>
+                    <th colspan="2">GDN Fee</th>
+                    <th colspan="2">KGX Fee</th>
+                    <th colspan="5">Merchant Fee</th>
+                </tr>
+                <tr>
+                    <th>{% trans "Order number" %}</th>
+                    <th>{% trans "Order Date Placed" %}</th>
+                    <th>{% trans "Order Amount" %}</th>
+                    <th>{% trans "Shipping Cost" %}</th>
+                    <th>{% trans "Product Promo" %}</th>
+                    <th>{% trans "Shiping Promo" %}</th>
+                    <th>{% trans "Total Order" %}</th>
+                    <th>{% trans "Payment Method" %}</th>
+                    <th>{% trans "% Based" %}</th>
+                    <th>{% trans "Bank Fee" %}</th>
+                    <th>{% trans "Amount Base" %}</th>
+                    <th>{% trans "iPay Cost" %}</th>
+                    <th>{% trans "Tax for iPay" %}<br>(VAT)</th>
+                    <th>{% trans "Service Tax" %}<br>(PPh23)</th>
+                    <th>{% trans "Total iPay Cost" %}</th>
+                    <th>{% trans "% Based" %}</th>
+                    <th>{% trans "Total GDN Fee" %}</th>
+                    <th>{% trans "KGX Fee" %}</th>
+                    <th>{% trans "Promo Shipping" %}</th>
+                    <th>{% trans "Total Order" %}</th>
+                    <th>{% trans "Total iPay Cost" %}</th>
+                    <th>{% trans "Total GDN Cost" %}</th>
+                    <th>{% trans "Income Transferred by iPay88" %}</th>
+                    <th>{% trans "Remarks" %}</th>
+                </tr>
+                {% for order in objects %}
+                    <tr>
+                        <td><a href="{% url 'dashboard:order-detail' order.number %}">{{ order.number }}</a></td>
+                        <td>{{ order.date_placed}}</td>
+                        <td>{{ order.order_amount|currency_decimal_point}}</td>
+                        <td>{{ order.shipping_cost|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.product_promo|currency_decimal_point|default:'-' }}</td>
+                        <td>{{ order.shipping_promo|currency_decimal_point|default:'-' }}</td>
+                        <td>{{ order.total_order|currency_decimal_point|default:'-' }}</td>
+                        <td>{{ order.payment_method|safe|default:"-" }}</td>
+                        <td>{{ order.total_percent_fee|default:"-" }}</td>
+                        <td>{{ order.total_bank_fee|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.total_amount_fee|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.ipay_cost|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.tax_vat|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.tax_pph23|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.total_ipay_cost|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.gdn_fee_percent|default:"-" }}</td>
+                        <td>{{ order.total_gdn_fee|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.shipping_cost|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.shipping_promo|currency_decimal_point|default:'-' }}</td>
+                        <td>{{ order.total_order|currency_decimal_point|default:'-' }}</td>
+                        <td>{{ order.total_ipay_cost|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.total_gdn_fee|currency_decimal_point|default:"-" }}</td>
+                        <td>{{ order.income_ipay|currency_decimal_point|default:"-" }}</td>
+                        <td>Include shipping cost</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="23">Summary</th>
+                </tr>
+                <tr>
+                    {% get_count_summary_order qs 'order_amount' as total_order_before_voucher %}
+                    {% get_count_summary_order qs 'total_order' as total_order_incl_tax %}
+                    {% get_count_summary_order qs 'shipping_cost' as total_kgx_fee %}
+                    {% get_count_summary_order qs 'ipay_cost' as total_ipay_cost %}
+                    {% get_count_summary_order qs 'total_ipay_cost' as final_total_ipay_cost %}
+                    {% get_count_summary_order qs 'total_gdn_fee'  as total_order_gdn_fee %}
+                    {% get_count_summary_order qs 'income_ipay'  as total_order_income_tf %}
+
+
+                    <td></td>
+                    <td></td>
+                    <td>{{ total_order_before_voucher|currency_decimal_point }}</td>
+                    <td>{{ total_kgx_fee|currency_decimal_point }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ total_order_incl_tax|currency_decimal_point }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ total_ipay_cost|currency_decimal_point }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ final_total_ipay_cost|currency_decimal_point }}</td>
+                    <td></td>
+                    <td>{{ total_order_gdn_fee|currency_decimal_point }}</td>
+                    <td>{{ total_kgx_fee|currency_decimal_point }}</td>
+                    <td></td>
+                    <td>{{ total_order_incl_tax|currency_decimal_point }}</td>
+                    <td>{{ final_total_ipay_cost|currency_decimal_point }}</td>
+                    <td>{{ total_order_gdn_fee|currency_decimal_point }}</td>
+                    <td>{{ total_order_income_tf|currency_decimal_point }}</td>
+                    <td></td>
+                </tr>
+            {% else %}
+                <tr><td>{% trans "No results found." %}</td></tr>
+            {% endif %}
+        </table>
+    </div>
+    {% include "dashboard/partials/pagination.html" %}
+{% endblock %}

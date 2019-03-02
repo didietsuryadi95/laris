@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load promotion_tags %}
+{% load category_tags %}
+{% load utils_tags %}
+
+{% block layout %}
+    {% block loading_first %}
+        {% include "partials/first-loading.html" %}
+    {% endblock loading_first %}
+    <div class="gdn-page gdn-page-checkout">
+
+        {% include 'partials/alert_messages.html' %}
+        {% if not order and basket  %}
+            {% get_product_tag_data_on_basket request basket as product_on_basket %}
+        {% else %}
+            {% get_product_tag_data_on_basket request order is_checkout=True as product_on_basket %}
+        {% endif %}
+        <div id="data-basket" data-basketid="{% if not order and basket %} {{ basket.id }} {% else %} {{ order.id }} {% endif %}"
+             data-basket="{{ product_on_basket }}"></div>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div id="promotions">
+            {% for promotion in promotions_page %}
+                {% render_promotion promotion %}
+            {% endfor %}
+        </div>
+    </div>
+    {% include "partials/footer_checkout.html" %}
+{% endblock %}

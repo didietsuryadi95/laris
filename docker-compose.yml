@@ -1,0 +1,47 @@
+---
+version: '2'
+services:
+  #pstgresql
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=p@ssw0rd24
+      - POSTGRES_USER=jimshoney
+      - POSTGRES_DB=jimshoney
+    ports:
+      - 5432:5432
+    volumes:
+      - ../jims-data:/var/lib/postgresql/data
+
+  #solr
+  solr:
+    image: solr:6.5
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./solr-core/jimshoney:/opt/solr/server/solr/mycores/jimshoney
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - jimshoney
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
+
+  #rabbitmq
+  rabbit:
+    image: "rabbitmq:3-management"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    labels:
+      NAME: "rabbitmq"
+
+    # Enable volume is have configuration, create directory rabbitmq : mkdir ../rabbitmq/
+    # volumes:
+    #   - "../rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    #- "../rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro"

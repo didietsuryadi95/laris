@@ -1,0 +1,5 @@
+---
+http_hostname: staging.testimobysb.com
+domains: testimobysb.com
+is_local_dev: no
+app_role: staging

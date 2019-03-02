@@ -1,0 +1,5 @@
+[testimo-omnibus:children]
+testimo-omnibus-servers
+
+[testimo-omnibus-servers]
+149.129.248.163 ansible_private_key=~/.ssh/id_rsa host_key_checking=False ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3
