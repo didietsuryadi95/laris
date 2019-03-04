@@ -42,7 +42,7 @@ ses_tls: True
 gdn_fee: "10"
 
 #MAILCHIMP
-mchimp_list: ""
+mchimp_list: "6a7d1b67f8"
 mchimp_key: "{{ vault_mchimp_key }}"
 
 #ipay

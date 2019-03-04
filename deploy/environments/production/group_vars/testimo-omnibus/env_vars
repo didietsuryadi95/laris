@@ -43,7 +43,7 @@ ses_email: ""
 gdn_fee: "10"
 
 #MAILCHIMP
-mchimp_list: "1fb2df5eb5"
+mchimp_list: "b55ee700b6"
 mchimp_key: "{{ vault_mchimp_key }}"
 
 #ipay
