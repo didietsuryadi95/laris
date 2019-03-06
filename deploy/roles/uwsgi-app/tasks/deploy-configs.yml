@@ -1,4 +1,17 @@
 ---
+
+- name: Check if conf.d directory already exist
+  stat:
+    path: "/etc/nginx/conf.d"
+  register: confd
+  when: (app_role != "vagrant")
+
+- name: Make conf.d directory exists
+  file:
+    path: "/etc/nginx/conf.d"
+    state: directory
+  when: (app_role != "vagrant" and confd.stat.exists == False )
+
 - name: Deploy site configs
   template:
     src: conf.d/uwsgi.conf.j2
