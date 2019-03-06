@@ -1,6 +1,6 @@
-{% load currency_filters i18n %}{% load utils_tags %}{% load function_tags %}{% with order_number=order.number %}Halo, {{ order.user.first_name|add:" "|add:order.user.last_name | default:"Pelanggan JimsHoneyOfficial.com." }}
+{% load currency_filters i18n %}{% load utils_tags %}{% load function_tags %}{% with order_number=order.number %}Halo, {{ order.user.first_name|add:" "|add:order.user.last_name | default:"Pelanggan TestimoBySB.com." }}
 
-Pesanan Anda dengan nomor {{ order.number }} telah selesai, terima kasih karena telah berbelanja pada JimsHoneyOfficial.com. Kami tunggu kedatangan Anda untuk bertransaksi lagi pada JimsHoneyOfficial.com
+Pesanan Anda dengan nomor {{ order.number }} telah selesai, terima kasih karena telah berbelanja pada TestimoBySB.com. Kami tunggu kedatangan Anda untuk bertransaksi lagi pada TestimoBySB.com
 {% endwith %}
 
 Detail Pesanan

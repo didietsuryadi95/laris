@@ -1,5 +1,5 @@
 {% load currency_filters i18n %}{% load utils_tags %}{% load function_tags %}{% with order.sources.last as payment %}
-Halo, {{ order.user.first_name|add:" "|add:order.user.last_name | default:"Pelanggan jimshoneyofficial.com"}}
+Halo, {{ order.user.first_name|add:" "|add:order.user.last_name | default:"Pelanggan TestimoBySB.com"}}
 
 Terima Kasih Sudah Melakukan Pembayaran
 {% with payment.source_type as type %}
@@ -13,7 +13,7 @@ Pembayaran sudah kami terima.
 dengan nominal : Rp {{ payment.amount_debited|floatformat:"2" }}
 {% endwith %}
 
-Terima kasih sudah memesan barang dari JimsHoneyOfficial.com
+Terima kasih sudah memesan barang dari TestimoBySB.com
 
 Pesanan Anda dengan Nomor Pesanan {{ order.number }}
 
@@ -42,4 +42,4 @@ Alamat Pengiriman: {{ order.user.first_name|add:" "|add:order.user.last_name | d
 {{ order.shipping_address.province.name }} - {{ order.shipping_address.postcode }}
 
 Jika Anda memiliki pertanyaan seputar pesanan Anda,
-silakan menghubungi kami pada: sales@JimsHoneyOfficial.com 0853-5390-0088 / 0853-5390-0099
+silakan menghubungi kami pada: sales@TestimoBySB.com 0853-5390-0088 / 0853-5390-0099

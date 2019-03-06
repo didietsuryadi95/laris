@@ -12,7 +12,7 @@ Order = get_model('order', 'Order')
 
 EventHandler = get_class('order.processing', 'EventHandler')
 
-logger = logging.getLogger('jimshoney')
+logger = logging.getLogger('testimo')
 
 
 @task(name='auto_update_order_status')

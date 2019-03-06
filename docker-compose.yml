@@ -6,12 +6,12 @@ services:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=p@ssw0rd24
-      - POSTGRES_USER=jimshoney
-      - POSTGRES_DB=jimshoney
+      - POSTGRES_USER=testimo
+      - POSTGRES_DB=testimo
     ports:
       - 5432:5432
     volumes:
-      - ../jims-data:/var/lib/postgresql/data
+      - ../testimo-data:/var/lib/postgresql/data
 
   #solr
   solr:
@@ -19,11 +19,11 @@ services:
     ports:
       - "8983:8983"
     volumes:
-      - ./solr-core/jimshoney:/opt/solr/server/solr/mycores/jimshoney
+      - ./solr-core/testimo:/opt/solr/server/solr/mycores/testimo
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - jimshoney
+      - testimo
   memcached:
     image: memcached
     ports:

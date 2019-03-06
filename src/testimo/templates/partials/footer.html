@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <footer class="gdn-footer d-block container-fluid">
     {% block footer %}
-        <div class="gdn-footer-top bg-accent-light d-block">
+        <div class="gdn-footer-top bg-light-grey d-block">
             <div class="container">
                 <div class="row center-xs without-margin">
                     <div class="col-lg-6 col-xs-12">
@@ -35,23 +35,28 @@
             <div class="container">
                 <div class="row between-xs">
                     <div class="col-lg-2 col-sm-6 col-xs-12">
-                        <h4 class="text-heading-1">
+                        <h4 class="text-body-1">
                             Ikuti Kami
                         </h4>
                         <ul class="ul-list-none gdn-footer-middle-social">
-                            <li><a href="{{ SOCIAL_INSTAGRAM }}" target="_blank" class="text-black d-block"><i
-                                class="fa fa-instagram"></i></a></li>
-                            <li><a href="{{ SOCIAL_FACEBOOK }}" target="_blank" class="text-black d-block"><i
-                                class="fa fa-facebook"></i></a></li>
-                            <li><a href="{{ SOCIAL_TWITTER }}" target="_blank" class="text-black d-block"><i
-                                class="fa fa-twitter"></i></a></li>
-                            <li><a href="{{ SOCIAL_YOUTUBE }}" target="_blank" class="text-black d-block"><i
-                                class="fa fa-youtube-play"></i></a></li>
+                            {% for s in SOCIAL_MEDIA %}
+                                {% if s.link %}
+                                    <li><a href="{{ s.link }}" target="_blank" class="text-black d-block"><i
+                                    class="{{ s.icon }}"></i></a></li>
+                                {% endif %}
+{##}
+{#                            <li><a href="{{ SOCIAL_FACEBOOK }}" target="_blank" class="text-black d-block"><i#}
+{#                                class="fa fa-facebook"></i></a></li>#}
+{#                            <li><a href="{{ SOCIAL_TWITTER }}" target="_blank" class="text-black d-block"><i#}
+{#                                class="fa fa-twitter"></i></a></li>#}
+{#                            <li><a href="{{ SOCIAL_YOUTUBE }}" target="_blank" class="text-black d-block"><i#}
+{#                                class="fa fa-youtube-play"></i></a></li>#}
+                            {% endfor %}
                         </ul>
                     </div>
 
                     <div class="col-lg-2 col-sm-6 col-xs-12">
-                        <h4 class="text-heading-1">
+                        <h4 class="text-body-1">
                             Pembayaran
                         </h4>
                         <ul class="ul-list-none gdn-footer-middle-bank">
@@ -71,7 +76,7 @@
                                 <img src="{% static "img/bank/bni.png" %}" alt="">
                             </li>
                         </ul>
-                        <h4 class="text-heading-1">
+                        <h4 class="text-body-1">
                             Pengiriman
                         </h4>
                         <ul class="ul-list-none gdn-footer-middle-bank">
@@ -82,7 +87,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-xs-12">
-                        <h4 class="text-heading-1">
+                        <h4 class="text-body-1">
                             Layanan Pelanggan
                         </h4>
                         <ul class="ul-list-none block-li">
@@ -118,7 +123,7 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-6 col-xs-12">
-                        <h4 class="text-heading-1">
+                        <h4 class="text-body-1">
                             Tentang Kami
                         </h4>
                         <ul class="ul-list-none block-li">
@@ -144,7 +149,7 @@
         </div>
         <div class="gdn-footer-bottom bg-primary d-block">
             <div class="d-block text-center">
-                <span class="text-body-1 text-body-2 text-black">© 2019 - PT. Gramedia Digital Nusantara</span>
+                <span class="text-caption text-white">© 2019 - PT. Gramedia Digital Nusantara</span>
             </div>
         </div>
     {% endblock %}

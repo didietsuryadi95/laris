@@ -6,12 +6,12 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="" class="text-body-1 text-black">Tentang Jims Honey</a>
+                    <a href="" class="text-body-1 text-white">Tentang T'estimo</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="gdn-dropdown">
                         <a href="#" class="gdn-dropdown-button" data-id="dropdown-user">
-                            <span class="text-body-1 text-black">Hi, {{ user.get_short_name }}</span>
+                            <span class="text-body-1 text-white">Hi, {{ user.get_short_name }}</span>
                             <span class="gdn-dropdown-arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                         </a>
 
@@ -30,7 +30,7 @@
                     </li>
                 {% else %}
                     <li>
-                        <a href="{% url 'customer:login' %}" class="text-body-1 text-black">Masuk/Daftar</a>
+                        <a href="{% url 'customer:login' %}" class="text-body-1 text-white">Masuk/Daftar</a>
                     </li>
                 {% endif %}
             </ul>

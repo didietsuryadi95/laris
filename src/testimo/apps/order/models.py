@@ -14,7 +14,7 @@ from oscar.apps.order.abstract_models import AbstractLine, AbstractOrderNote, Ab
 from apps.address.models import State, District, Subdistrict, Village
 from apps.payment.constants import CARD_TYPE, BINS
 
-log = logging.getLogger('jimshoney')
+log = logging.getLogger('testimo')
 
 STATUS_CANCELED = 'Canceled'
 STATUS_SHIPPED = 'Shipped'

@@ -42,7 +42,12 @@
                 </div>
             {% else %}
                 <div class="gdn-subtitle">
-                    <h1 class="text-title-3 text-title-4"><i class="fa fa-map-marker"></i>Alamat Kirim</h1>
+                    <h2 class="text-heading-3 text-heading-4  d-flex middle-xs">
+                        <i class="fa fa-map-marker" style="margin-right:7px;"></i>
+                        <span class="text-heading-3 text-heading-4">
+                            Alamat Kirim
+                        </span>
+                    </h2>
                 </div>
                 {% with "Kamu belum memiliki alamat kirim, silahkan tambah alamat pengiriman kamu" as wording %}
                     {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording js_class='add-address' js="form-create-address" button_name="Tambah Alamat" href="customer:address-create" id="product-list-not-found" image="address-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}

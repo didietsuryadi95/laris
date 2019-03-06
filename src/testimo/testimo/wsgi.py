@@ -1,5 +1,5 @@
 """
-WSGI config for jimshoney project.
+WSGI config for testimo project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -16,7 +16,7 @@ NEWRELIC_INI=os.getenv('JIM_NEWRELIC_INI', 'JIM')
 if os.path.exists(NEWRELIC_INI):
     newrelic.agent.initialize(NEWRELIC_INI)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "jimshoney.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testimo.settings")
 
 application = get_wsgi_application()
 

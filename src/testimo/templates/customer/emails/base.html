@@ -6,18 +6,13 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link
-        href="https://fonts.googleapis.com/css?family=Rubik:400,500,700"
-        rel="stylesheet"
-    />
-    <link
-        href="https://fonts.googleapis.com/css?family=Muli:400,500,700"
-        rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Sarabun:500,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Thasadith:700" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
-            font-family: "Rubik", sans-serif;
+            font-family: "Sarabun", sans-serif;
             box-sizing: border-box;
             font-size: 14px;
         }
@@ -142,7 +137,7 @@
         }
 
         .content-text {
-            font-family: "Rubik", sans-serif;
+            font-family: "Sarabun", sans-serif;
             font-size: 16px;
             font-weight: normal;
             font-style: normal;
@@ -182,7 +177,7 @@
         }
 
         .btn-accent {
-            color: #faa0aa;
+            color: #1E1E1E;
             text-decoration: none;
             border-width: 10px 20px;
             line-height: 2em;
@@ -278,18 +273,18 @@
         }
 
         .text-caption {
-            font-family: Rubik;
+            font-family: Sarabun;
             font-size: 12px;
             font-weight: 300;
             font-style: normal;
             font-stretch: normal;
             line-height: 1.33;
             letter-spacing: 0.4px;
-            color: #828282;
+            color: #DCDCDC;
         }
 
         .text-body-1 {
-            font-family: Muli;
+            font-family: Thasadith;
             font-size: 18px;
             font-weight: normal;
             font-style: normal;
@@ -300,7 +295,7 @@
         }
 
         .text-heading-1 {
-            font-family: Rubik;
+            font-family: Sarabun;
             font-size: 26px;
             font-weight: bold;
             font-style: normal;
@@ -420,7 +415,7 @@
                                         <td style="text-align: center;border-bottom: 1px solid #e6e6e6;">
                                             <a style="width: 150px;padding: 10px 0;" href="{{ homepage_url }}"
                                                target="_blank"><img style="width: 150px;"
-                                                                    src="https://dev-jimshoney.gramedia.io/static/img/logo/logo.png"
+                                                                    src="{{ homepage_url }}/static/img/logo/logo-mobile.png"
                                                                     alt=""></a>
                                         </td>
                                     </tr>
@@ -451,7 +446,7 @@
                                     border="0"
                                     width="100%"
                                     cellpadding="30"
-                                    style="background: #fddfe1"
+                                    style="background: #1E1E1E"
                                     cellspacing="0"
                                 >
                                     <tbody>
@@ -460,35 +455,9 @@
                                             <table>
                                                 <tr>
                                                     <td style="padding:0 10px;">
-                                                        <a target="_blank" href="https://www.instagram.com/jims_honey/"
+                                                        <a target="_blank" href="{{ instagram_url }}"
                                                         ><img
-                                                            src="https://dev-jimshoney.gramedia.io/static/img/icon/instagram.png"
-                                                            alt=""
-                                                            target="_blank"
-                                                        /></a>
-                                                    </td>
-                                                    <td style="padding:0 10px;">
-                                                        <a target="_blank"
-                                                           href="https://www.facebook.com/JIMSHONEYORI1/"
-                                                        ><img
-                                                            src="https://dev-jimshoney.gramedia.io/staticfiles/img/icon/facebook.png"
-                                                            alt=""
-                                                            target="_blank"
-                                                        /></a>
-                                                    </td>
-                                                    <td style="padding:0 10px;">
-                                                        <a target="_blank" href="https://twitter.com/JHFashion"
-                                                        ><img
-                                                            src="https://dev-jimshoney.gramedia.io/static/img/icon/twitter.png"
-                                                            alt=""
-                                                            target="_blank"
-                                                        /></a>
-                                                    </td>
-                                                    <td style="padding:0 10px;">
-                                                        <a target="_blank"
-                                                           href="https://www.youtube.com/channel/UCDmbLrCN7W2_pwrZDwg_e8Q"
-                                                        ><img
-                                                            src="https://dev-jimshoney.gramedia.io/static/img/icon/youtube.png"
+                                                            src="{{ homepage_url }}/static/img/icon/instagram-white.png"
                                                             alt=""
                                                             target="_blank"
                                                         /></a>
@@ -505,26 +474,26 @@
                                                     <td style="padding:0 10px;">
                                                         <a
                                                             target="_blank"
-                                                            style="font-size:12px;text-decoration:none;color:#828282;line-height:16px; "
+                                                            style="font-size:12px;text-decoration:none;color:#DCDCDC;line-height:16px; "
                                                             href="{{ homepage_url }}/tentang-kami"
                                                         >Tentang Kami &nbsp;|&nbsp;
                                                         </a>
                                                         <a
                                                             target="_blank"
                                                             href="{{ homepage_url }}/kebijakan-privasi"
-                                                            style="font-size:12px;text-decoration:none;color:#828282;line-height:16px; "
+                                                            style="font-size:12px;text-decoration:none;color:#DCDCDC;line-height:16px; "
                                                         >Ketentuan Privasi &nbsp;|&nbsp;
                                                         </a>
                                                         <a
                                                             target="_blank"
                                                             href="{{ homepage_url }}/syarat-ketentuan"
-                                                            style="font-size:12px;text-decoration:none;color:#828282;line-height:16px; "
+                                                            style="font-size:12px;text-decoration:none;color:#DCDCDC;line-height:16px; "
                                                         >Syarat dan Ketentuani &nbsp;|&nbsp;
                                                         </a>
                                                         <a
                                                             target="_blank"
                                                             href="{{ homepage_url }}/berhenti-berlangganan"
-                                                            style="font-size:12px;text-decoration:none;color:#828282;line-height:16px; "
+                                                            style="font-size:12px;text-decoration:none;color:#DCDCDC;line-height:16px; "
                                                         >Berhenti Berlangganan</a>
                                                     </td>
                                                 </tr>
@@ -537,7 +506,7 @@
                                                 <tr>
                                                     <td style="padding:0 10px;">
                                                         <p
-                                                            style="font-family: Rubik;font-size: 12px;font-weight: 300;font-style: normal;font-stretch: normal;line-height: 1.33;letter-spacing: 0.4px;"
+                                                            style="font-family: Sarabun;font-size: 12px;font-weight: 300;font-style: normal;font-stretch: normal;line-height: 1.33;letter-spacing: 0.4px;color:#DCDCDC"
                                                         >
                                                             © 2019 - PT. Gramedia Digital Nusantara
                                                         </p>

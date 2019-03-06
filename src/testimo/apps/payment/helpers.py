@@ -15,7 +15,7 @@ from apps.payment.constants import SETTLEMENT, PAID, BANK_TRANSFER, MANDIRI, PER
 
 from apps.order.models import PaymentEvent, PaymentEventQuantity, PaymentEventType, bank_name_from_mask
 
-log = logging.getLogger('jimshoney')
+log = logging.getLogger('testimo')
 
 Source = get_model('payment', 'Source')
 

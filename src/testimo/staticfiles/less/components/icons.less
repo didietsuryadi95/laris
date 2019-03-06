@@ -1,5 +1,5 @@
 .gdn-icon-logo {
-    background: url("/static/img/logo/logo.svg") transparent no-repeat;
+    background: url("/static/img/logo/logo-mobile.svg") transparent no-repeat;
     background-position: 50%;
     background-size: 190px 55px;
     width: 190px;
@@ -7,6 +7,15 @@
     height: 55px;
     text-indent: -99999px;
     font-size: 0;
+}
+
+.gdn-logo{
+    &-mobile{
+        display: none;
+    }
+    &-desktop{
+        display: block;
+    }
 }
 
 .gdn-logo-text {
@@ -22,7 +31,7 @@
     transition: 0.4s all ease-in-out;
 
     &.active {
-        transform: translateX(56px);
+        transform: translateY(20px);
         transition: 0.4s all ease-in-out;
     }
 }
@@ -43,24 +52,34 @@
             height: 65px;
         }
     }
+    .gdn-logo{
+        &-mobile{
+            display: flex;
+        }
+        &-desktop{
+            display: none;
+    }
+}
 }
 
 
 .header-logo-focus {
     .gdn-logo-text {
         transition: 0.3s all ease-in-out;
+        fill: transparent;
 
         &.active {
-            fill: #000;
+            fill: transparent;
             transition: 0.3s all ease-in-out;
         }
     }
 
     .gdn-logo-icon {
         transition: 0.4s all ease-in-out;
+        transform: translateY(20px);
 
         &.active {
-            transform: translateX(0);
+            transform: translateY(20px);
             transition: 0.4s all ease-in-out;
         }
     }

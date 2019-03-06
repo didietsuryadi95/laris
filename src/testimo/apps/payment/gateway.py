@@ -9,7 +9,7 @@ import base64
 import requests
 from django.http import JsonResponse
 
-log = logging.getLogger('jimshoney')
+log = logging.getLogger('testimo')
 TokenResponse = namedtuple('TokenResponse', ['token', 'redirect_url'])
 
 

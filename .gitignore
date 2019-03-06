@@ -166,22 +166,22 @@ fabric.properties
 .idea/httpRequests
 search_index.whoosh/
 
-src/jimshoney/static/*
-src/jimshoney/static/
-src/jimshoney/static/.gitkeep
+src/testimo/static/*
+src/testimo/static/
+src/testimo/static/.gitkeep
 
-src/jimshoney/uploads/*
-src/jimshoney/uploads/
+src/testimo/uploads/*
+src/testimo/uploads/
 logs/*
 !logs/.gitkeep
 !il8n/.gitkeep
 
 .vscode/
 
-!src/jimshoney/uploads/.gitkeep
-!src/jimshoney/uploads/image_not_founds.jpg
+!src/testimo/uploads/.gitkeep
+!src/testimo/uploads/image_not_founds.jpg
 
 node_modules
 
-solr-core/jimshoney/data/*
-src/jimshoney/posactivate
+solr-core/testimo/data/*
+src/testimo/posactivate

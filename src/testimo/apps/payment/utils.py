@@ -23,7 +23,7 @@ SourceType = get_model('payment', 'SourceType')
 OrderNote = get_model('order', 'OrderNote')
 
 
-log = logging.getLogger('jimshoney')
+log = logging.getLogger('testimo')
 
 
 process_order = {

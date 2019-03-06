@@ -1,0 +1,201 @@
+
+[
+  {
+    "action": ["replace_files"],
+    "value": "testimobysb.com",
+    "variable": "domain_name",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "T'estimo by Sari Batubara",
+    "variable": "shop_name",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "TestimoBySB.com",
+    "variable": "shop_tag_line",
+    "target": ["html", "settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "TES",
+    "variable": "prefix",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "",
+    "variable": "description",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "T'estimo By Sari Batubara",
+    "variable": "name",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "0811650444",
+    "variable": "mobile",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "Jl. Condet Pejaten No 11, RT 002 RW 007, Kelurahan Pejaten Barat, Kecamatan Pasar Minggu",
+    "variable": "address",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "sari_batubara54@yahoo.com",
+    "variable": "email",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "Jakarta Selatan",
+    "variable": "city",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "DKI Jakarta",
+    "variable": "state",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "Indonesia",
+    "variable": "country",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "12510",
+    "variable": "postcode",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value":  "https://www.instagram.com/testimo_bysb/",
+    "variable": "instagram",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "",
+    "variable": "facebook",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "",
+    "variable": "twitter",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "",
+    "variable": "youtube",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#1E1E1E",
+    "variable": "primary",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#1E1E1E",
+    "variable": "accent",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#FA3C50",
+    "variable": "notice",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#32AA6E",
+    "variable": "success",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#F4D143",
+    "variable": "alert",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#FA3C50",
+    "variable": "error",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#1E1E1E",
+    "variable": "black",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#828282",
+    "variable": "grey",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#FFFFFF",
+    "variable": "white",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#DCDCDC",
+    "variable": "light-grey",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "#1E1E1E",
+    "variable": "primary-dark",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "Thasadith",
+    "variable": "primary_font_name",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "thasadith",
+    "variable": "primary_font_var",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "Sarabun",
+    "variable": "secondary_font_name",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "sarabun",
+    "variable": "secondary_font_var",
+    "target": ["style"]
+  },
+  {
+    "action": ["replace_files", "change_folder_name"],
+    "value": "testimo",
+    "variable": "app_name",
+    "target": ["settings", "folder"]
+  }
+]

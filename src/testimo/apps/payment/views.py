@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import PaymentNotificationsForm
 from .utils import PaymentServices
 
-log = logging.getLogger('jimshoney')
+log = logging.getLogger('testimo')
 Order = get_model('order', 'Order')
 Source = get_model('payment', 'Source')
 SourceType = get_model('payment', 'SourceType')

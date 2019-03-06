@@ -2,4 +2,4 @@
 {% load staticfiles %}
 {% load function_tags %}
 
-JimsHoneyOfficial.com - Pesanan {{order_number|stringformat:"s"}} Telah Selesai
+TestimoBySB.com - Pesanan {{order_number|stringformat:"s"}} Telah Selesai

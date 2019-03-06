@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from apps.order.models import Order
 from apps.payment.utils import on_payment_updated
 
-log = logging.getLogger('jimshoney')
+log = logging.getLogger('testimo')
 
 
 @csrf_exempt
