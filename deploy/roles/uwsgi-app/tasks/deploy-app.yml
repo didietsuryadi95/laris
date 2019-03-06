@@ -1,7 +1,5 @@
 ---
-########
-# Code #
-########
+# Code
  - name: Make sure app users's www directory exists
    file:
      path: /srv/{{ app_user }}/www
@@ -78,9 +76,8 @@
    become: true
    become_user: "{{ app_user }}"
 
-#######
-# Nfs #
-#######
+# Nfs
+
  - name: (Production) insert/update "fstab" configuration block in /etc/fstab
    blockinfile:
      path: /etc/fstab
@@ -119,7 +116,7 @@
      owner: "{{ app_user }}"
      group: www-data
      mode: 0775
-   with_items: 
+   with_items:
     - static
     - uploads
    when: (app_role != "production")
@@ -140,9 +137,23 @@
     - Jenkinsfile
     - Vagrantfile
 
-############
-# Log file #
-############
+  # Log file
+ - name: Check if logs directory already exist
+   stat:
+     path: "/srv/{{ app_user }}/www/logs"
+   register: logs
+
+ - name: Make logs directory exists
+   file:
+     path: "/srv/{{ app_user }}/www/logs"
+     state: directory
+     owner: "{{ app_user }}"
+     group: www-data
+     recurse: yes
+     mode: 0777
+   when: logs.stat.exists == False
+
+
  - name: Make sure all application log file exists and has correct permission
    file:
      path: '/srv/{{ app_user }}/www/logs/{{ item }}.log'
@@ -154,10 +165,8 @@
      - app
      - uwsgi
 
-########
-# Solr #
-########
- - name: (Production) Copy Solr-Core Haystack
+# Solr
+ - name:  (Production) Copy Solr-Core Haystack
    shell: "rsync -avzP -og --chown=solr:solr /srv/{{ app_user }}/www/solr-core/{{ app_user }} {{ python_user }}@{{ SOLR_HOST }}:/var/solr/data/"
    when: (app_role == "production")
 
@@ -218,13 +227,12 @@
      recurse: yes
    become: true
 
-#################
-# Python Manage #
-#################
+# Python manage
+
  - name: Install python application requirements
    pip:
     virtualenv: /srv/{{ app_user }}/venv
-    requirements: /srv/{{ app_user }}/www/requirements/prod.txt
+    requirements: /srv/{{ app_user }}/www/requirements.txt
    become: yes
    become_user: "{{ app_user }}"
 
@@ -250,6 +258,11 @@
      owner: "{{ app_user }}"
      group: www-data
      force: yes
+
+ - name: Chmod manage.py
+   file:
+    path: "/srv/{{ app_user }}/www/src/{{ app_user }}/manage.py"
+    mode: a+x
 
  - name: Ensure database migrations are applied
    django_manage:
@@ -279,7 +292,7 @@
    become_user: "{{ app_user }}"
    become_flags: '--login'
 
- - name: Chown static
+ - name: Chown Symlink Static
    file:
      path: /srv/{{ app_user }}/www/src/{{ app_user }}/static
      group: www-data
@@ -313,9 +326,8 @@
      group: www-data
      force: yes
 
-##########
-# Rabbit #
-##########
+# Rabbit
+
  - name: Create a vhost for the application
    rabbitmq_vhost:
      name: "{{ app_name }}"
@@ -333,9 +345,9 @@
      state: present
    when: (app_role != "production")
 
-##########
-# Celery #
-##########
+
+# Celery
+
  - name: Copy Celery service script to /opt
    template:
      src: "templates/celery/{{ item }}.sh"
@@ -371,7 +383,6 @@
      state: stopped
    with_items:
      - 'celery'
-   when: (app_role != "production")
 
  - name: Make sure Celery services is started
    systemd:
