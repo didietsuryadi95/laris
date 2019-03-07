@@ -8,8 +8,8 @@ from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
 from django.core.exceptions import ValidationError
+
 from meta.models import ModelMeta
-from sorl.thumbnail import get_thumbnail
 
 from oscar.core.loading import get_class, get_model
 
@@ -48,8 +48,8 @@ class Product(ModelMeta, AbstractProduct):
         return strip_tags(self.description)
 
     def get_meta_image(self):
-        im = get_thumbnail(self.primary_image, '300x300')
-        return im.url
+        im = self.primary_image()
+        return im.original.url if im else None
 
     def get_date(self, param):
         if param == 'published_time' or param == 'modified_time':
