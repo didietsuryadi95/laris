@@ -31,7 +31,7 @@ class Order(AbstractOrder):
     @property
     def ipay_cost(self):
         source_type = self.sources.last().source_type
-        percentage_fee = self.total_incl_tax * source_type.total_percent_fee
+        percentage_fee = (self.total_incl_tax * source_type.total_percent_fee) / 100
         return round(percentage_fee + source_type.total_bank_fee + source_type.total_amount_fee, 2)
 
     @property
