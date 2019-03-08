@@ -10,7 +10,7 @@ from oscar.apps.catalogue.abstract_models import AbstractProduct
 from django.core.exceptions import ValidationError
 
 from meta.models import ModelMeta
-
+from sorl.thumbnail import get_thumbnail
 from oscar.core.loading import get_class, get_model
 
 AllProductManager = get_class('catalogue.managers', 'AllProductManager')
@@ -48,8 +48,8 @@ class Product(ModelMeta, AbstractProduct):
         return strip_tags(self.description)
 
     def get_meta_image(self):
-        im = self.primary_image()
-        return im.original.url if im else None
+        im = get_thumbnail(self.primary_image, '500x500')
+        return im.url
 
     def get_date(self, param):
         if param == 'published_time' or param == 'modified_time':
