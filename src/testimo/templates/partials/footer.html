@@ -41,8 +41,12 @@
                         <ul class="ul-list-none gdn-footer-middle-social">
                             {% for s in SOCIAL_MEDIA %}
                                 {% if s.link %}
-                                    <li><a href="{{ s.link }}" target="_blank" class="text-black d-block"><i
-                                    class="{{ s.icon }}"></i></a></li>
+                                    <li>
+                                        <a href="{{ s.link }}" target="_blank" class="text-black d-block">
+                                            <i class="{{ s.icon }}"></i>
+                                            <span class="text-black text-body-1">{{ s.name }}</span>
+                                        </a>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

@@ -584,11 +584,11 @@ BROKER_URL = env.string('RABBIT_CONN_PASS', 'amqp://guest:guest@127.0.0.1:5672//
 # Banner Mini Config
 MAX_BANNER_MINI = 4
 BANNER_MINI_PLACEHOLDER = {
-    'image': 'image_not_founds.jpg',
+    'image': 'image_not_found.jpg',
     'title': 'default mini banner',
     'slug': 'default-mini-banner',
     'caption': 'default mini banner',
-    'url': 'https://testimo.com/',
+    'url': '',
     'description': 'default mini banner',
     'published': True
 }

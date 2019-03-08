@@ -302,16 +302,22 @@
 
         &-input-quantity {
             &-box {
+
                 bottom: 0;
                 border-top: 1px solid @grey;
                 left: 0;
                 right: 0;
                 position: fixed;
-                padding: 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 background: @white;
                 z-index: 20;
 
                 .row {
+                    transition: all 0.3s ease;
+                    padding-bottom: env(safe-area-inset-bottom);
                     width: 550px;
                     margin: 0 auto;
                 }

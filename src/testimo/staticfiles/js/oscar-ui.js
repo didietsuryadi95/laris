@@ -1209,8 +1209,7 @@ var oscar = (function (o, $) {
                 o.uiAnimate.onBackHeader();
             }
             o.uiAnimate.removeAlert();
-
-
+            let defaultHeight = $(window).height();
         },
         removeAlert: function () {
             if (!$("#messages").parents(".gdn-cart-alert").length && $("#messages").children().length > 0) {

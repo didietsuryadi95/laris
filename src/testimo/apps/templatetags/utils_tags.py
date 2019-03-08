@@ -8,6 +8,7 @@ from oscar.core.loading import get_model, get_class
 from decimal import InvalidOperation
 from babel.numbers import format_currency
 from django.utils.translation import get_language, to_locale
+from django.contrib.sites.shortcuts import get_current_site
 
 Benefit = get_model('offer', 'Benefit')
 SourceType = get_model('payment', 'SourceType')
@@ -21,6 +22,11 @@ ri = register.inclusion_tag
 def get_scheme():
     scheme = 'http' if settings.DEBUG else 'https'
     return scheme + '://'
+
+
+@register.simple_tag
+def get_full_current_site(request=None):
+    return get_scheme() + get_current_site(request).domain
 
 
 @register.inclusion_tag('partials/header.html')
