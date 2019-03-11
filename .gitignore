@@ -172,7 +172,7 @@ src/testimo/static/.gitkeep
 
 
 !src/testimo/uploads/.gitkeep
-!src/testimo/uploads/image_not_found.jpg
+!src/testimo/uploads/image_not_found.png
 src/testimo/uploads/*
 src/testimo/uploads/
 
