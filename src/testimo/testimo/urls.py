@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/statuscheck/', include('celerybeat_status.urls')),
     path('', application.urls),
+    path('', include('static_sitemaps.urls')),
     path('ajax/load-states/', list_states, name='load-address-states'),
     path('ajax/load-districts/', list_districts, name='load-address-districts'),
     path('ajax/load-subdistricts/', list_subdistricts, name='load-address-subdistricts'),

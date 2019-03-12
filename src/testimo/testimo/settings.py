@@ -56,27 +56,29 @@ if not DEBUG:
     }
 
 INSTALLED_APPS = [
-     'debug_toolbar',
-     'apps.user',
-     'django.contrib.admin',
-     'django.contrib.auth',
-     'django.contrib.contenttypes',
-     'django.contrib.sessions',
-     'django.contrib.sites',
-     'django.contrib.messages',
-     'django.contrib.staticfiles',
-     'django.contrib.flatpages',
-     'django_extensions',
-     'widget_tweaks',
-     'celerybeat_status',
-     'compressor',
-     'apps.campaign',
-     'apps.dashboard.campaign',
-     'apps.dashboard.destination_ranges',
-     'apps.partner_api',
-     'apps',
-     'meta'
- ] + get_core_apps([
+    'debug_toolbar',
+    'apps.user',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.sitemaps',
+    'django.contrib.staticfiles',
+    'django.contrib.flatpages',
+    'static_sitemaps',
+    'django_extensions',
+    'widget_tweaks',
+    'celerybeat_status',
+    'compressor',
+    'apps.campaign',
+    'apps.dashboard.campaign',
+    'apps.dashboard.destination_ranges',
+    'apps.partner_api',
+    'apps',
+    'meta'
+] + get_core_apps([
     'apps.address',
     'apps.basket',
     'apps.customer',
@@ -357,6 +359,13 @@ COMPRESS_CSS_FILTERS = [
 ]
 COMPRESS_CSS_HASHING_METHOD = None
 #
+
+STATICSITEMAPS_ROOT_SITEMAP = 'apps.sitemaps.base_sitemaps'
+STATICSITEMAPS_ROOT_DIR = STATIC_ROOT + '/sitemaps/'
+STATICSITEMAPS_URL = '/static/sitemaps/'
+STATICSITEMAPS_PING_GOOGLE = False
+STATICSITEMAPS_REFRESH_AFTER = 30
+
 OSCAR_USE_LESS = DEBUG
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')

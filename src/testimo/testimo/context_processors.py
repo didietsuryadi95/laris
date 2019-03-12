@@ -30,7 +30,7 @@ def global_settings(request):
             {
                 'link': instagram,
                 'icon': 'fa fa-instagram',
-                'name': 'Instagram'
+                'name': '@testimobysb'
             },
             {
                 'link': facebook,

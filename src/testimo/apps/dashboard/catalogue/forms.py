@@ -1,7 +1,7 @@
 from django import forms
 from django.core import exceptions
 from django.utils.translation import ugettext_lazy as _
-from oscar.forms.widgets import ImageInput
+from apps.forms.widgets import ImageInput
 
 from oscar.core.loading import get_class, get_model
 from oscar.forms.widgets import DateTimePickerInput
@@ -226,3 +226,28 @@ class ProductForm(forms.ModelForm):
                 value = self.cleaned_data[field_name]
                 setattr(self.instance.attr, attribute.code, value)
         super(ProductForm, self)._post_clean()
+
+
+# class ProductImageForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = ProductImage
+#         fields = ['product', 'original', 'caption']
+#         # use ImageInput widget to create HTML displaying the
+#         # actual uploaded image and providing the upload dialog
+#         # when clicking on the actual image.
+#         widgets = {
+#             'original': ImageInput(),
+#         }
+#
+#     def save(self, *args, **kwargs):
+#         # We infer the display order of the image based on the order of the
+#         # image fields within the formset.
+#         kwargs['commit'] = False
+#         obj = super(ProductImageForm, self).save(*args, **kwargs)
+#         obj.display_order = self.get_display_order()
+#         obj.save()
+#         return obj
+#
+#     def get_display_order(self):
+#         return self.prefix.split('-').pop()

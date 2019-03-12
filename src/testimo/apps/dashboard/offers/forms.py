@@ -8,6 +8,7 @@ from django.core.validators import MinValueValidator
 from oscar.core.loading import get_model
 
 ConditionalOffer = get_model('offer', 'ConditionalOffer')
+Condition = get_model('offer', 'Condition')
 Benefit = get_model('offer', 'Benefit')
 
 
@@ -42,6 +43,70 @@ class RestrictionsForm(forms.ModelForm):
             raise forms.ValidationError(_(
                 "The end date must be after the start date"))
         return cleaned_data
+
+
+class ConditionForm(forms.ModelForm):
+    COUNT, VALUE, COVERAGE = ("Count", "Value", "Coverage")
+
+    TYPE_CHOICES = (
+        (COUNT, _("Depends on number of items in basket that are in "
+                  "condition range")))
+
+    custom_condition = forms.ChoiceField(
+        required=False,
+        label=_("Custom condition"), choices=())
+    # type = forms.ChoiceField(label=_('Type'), choices=TYPE_CHOICES)
+
+    def __init__(self, *args, **kwargs):
+        super(ConditionForm, self).__init__(*args, **kwargs)
+
+        custom_conditions = Condition.objects.all().exclude(
+            proxy_class=None)
+        if len(custom_conditions) > 0:
+            # Initialise custom_condition field
+            choices = [(c.id, six.text_type(c)) for c in custom_conditions]
+            choices.insert(0, ('', ' --------- '))
+            self.fields['custom_condition'].choices = choices
+            condition = kwargs.get('instance')
+            if condition:
+                self.fields['custom_condition'].initial = condition.id
+        else:
+            # No custom conditions and so the type/range/value fields
+            # are no longer optional
+            for field in ('type', 'range', 'value'):
+                self.fields[field].required = True
+                if field == 'type':
+                    self.fields[field].choices = [f for f in self.fields[field].choices
+                                                  if f[0] not in ['Value', 'Coverage']]
+
+    class Meta:
+        model = Condition
+        fields = ['range', 'type', 'value']
+
+    def clean(self):
+        data = super(ConditionForm, self).clean()
+
+        # Check that either a condition has been entered or a custom condition
+        # has been chosen
+        if not any(data.values()):
+            raise forms.ValidationError(
+                _("Please either choose a range, type and value OR "
+                  "select a custom condition"))
+
+        if not data['custom_condition']:
+            if not data.get('range', None):
+                raise forms.ValidationError(
+                    _("A range is required"))
+
+        return data
+
+    def save(self, *args, **kwargs):
+        # We don't save a new model if a custom condition has been chosen,
+        # we simply return the instance that has been chosen
+        if self.cleaned_data['custom_condition']:
+            return Condition.objects.get(
+                id=self.cleaned_data['custom_condition'])
+        return super(ConditionForm, self).save(*args, **kwargs)
 
 
 class BenefitForm(forms.ModelForm):
