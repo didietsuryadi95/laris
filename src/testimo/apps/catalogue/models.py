@@ -4,10 +4,12 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.html import strip_tags
+from django.db.models.signals import post_save
 
 from django.utils.translation import ugettext_lazy as _
-from oscar.apps.catalogue.abstract_models import AbstractProduct
+from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductImage
 from django.core.exceptions import ValidationError
+from apps.templatetags.api_tags import get_oss_presigned_url
 
 from meta.models import ModelMeta
 from sorl.thumbnail import get_thumbnail
@@ -48,8 +50,7 @@ class Product(ModelMeta, AbstractProduct):
         return strip_tags(self.description)
 
     def get_meta_image(self):
-        im = get_thumbnail(self.primary_image, '500x500')
-        return im.url
+        return self.primary_image().get_image
 
     def get_date(self, param):
         if param == 'published_time' or param == 'modified_time':
@@ -130,7 +131,7 @@ class Product(ModelMeta, AbstractProduct):
             'price': int(price) if price else None,
             'category': [c.name for c in self.get_categories().all()],
             'variant': variant,
-            'image_url': uri_method(self.primary_image().original.url) if not image_missing else None,
+            'image_url': uri_method(self.primary_image().get_image) if not image_missing else None,
             'quantity': kwargs.get('quantity', None),
             'url': uri_method() if uri_method else None,
             'sku': kwargs.get('sku', None)
@@ -152,4 +153,24 @@ class Product(ModelMeta, AbstractProduct):
         return context
 
 
+class ProductImage(AbstractProductImage):
+    oss_image = models.CharField(max_length=200, blank=True, null=True)
+
+    @property
+    def get_image(self):
+        image_size = settings.PRODUCT_IMAGE
+        height = image_size['height']
+        width = image_size['width']
+        if self.original:
+            image = get_thumbnail(self.original, f'{height}x{width}')
+            return image.url
+        if self.oss_image:
+            return get_oss_presigned_url(self.oss_image, image_size)
+        return ''
+
+
 from oscar.apps.catalogue.models import *
+
+from .signals import upload_image_product
+
+post_save.connect(upload_image_product, sender=ProductImage, dispatch_uid='ProductImage.upload_image_product')

@@ -1,7 +1,6 @@
 from string import Template
 
 from django import forms
-from django.conf import settings
 from django.forms import ImageField
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
@@ -16,7 +15,7 @@ Endorsement = get_model('campaign', 'Endorsement')
 class PictureWidget(widgets.ImageInput):
     def render(self, name, value, attrs=None, renderer=None):
         html = Template("""<img src="$link" style="max-width:320px;height:auto;"/>""")
-        return mark_safe(html.substitute(link=f"{settings.MEDIA_URL}{self.attrs.get('value')}"))
+        return mark_safe(html.substitute(link=f"{self.attrs.get('value')}"))
 
 
 class BannerForm(forms.ModelForm):
@@ -36,10 +35,12 @@ class BannerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         if kwargs.get('instance'):
             self.base_fields['photo_desktop'] = ImageField(widget=
-                                                           PictureWidget({'value': kwargs.get('instance').image_desktop}),
+                                                           PictureWidget({'value': kwargs.get('instance')
+                                                                         .get_desktop_image}),
                                                            required=False)
             self.base_fields['photo_mobile'] = ImageField(widget=
-                                                          PictureWidget({'value': kwargs.get('instance').image_mobile}),
+                                                          PictureWidget({'value': kwargs.get('instance')
+                                                                        .get_mobile_image}),
                                                           required=False)
         else:
             if self.base_fields.get('photo_desktop'):
@@ -78,7 +79,7 @@ class BannerMiniForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('instance'):
-            self.base_fields['photo'] = ImageField(widget=PictureWidget({'value': kwargs.get('instance').image}),
+            self.base_fields['photo'] = ImageField(widget=PictureWidget({'value': kwargs.get('instance').get_image}),
                                                    required=False)
         else:
             if self.base_fields.get('photo'):
@@ -121,7 +122,7 @@ class EndorsementForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('instance'):
-            self.base_fields['photo'] = ImageField(widget=PictureWidget({'value': kwargs.get('instance').image}),
+            self.base_fields['photo'] = ImageField(widget=PictureWidget({'value': kwargs.get('instance').get_image}),
                                                    required=False)
         else:
             if self.base_fields.get('photo'):

@@ -625,6 +625,12 @@ IPAY_PAYMENT_URL = env.string('IPAY_URL', 'https://sandbox.ipay88.co.id/epayment
 IPAY_MERCHANT_CODE = env.string('IPAY_CODE', os.getenv('IPAY_CODE'))
 IPAY_MERCHANT_KEY = env.string('IPAY_PASS', os.getenv('IPAY_PASS'))
 
+OSS_ENDPOINT = env.string('ENDPOINT', os.getenv('OSS_ENDPOINT'))
+OSS_BUCKET_NAME = env.string('BUCKET_NAME', os.getenv('OSS_BUCKET_NAME'))
+OSS_ACCESS_KEY_ID = env.string('AKEY_ID', os.getenv('OSS_ACCESS_KEY_ID'))
+OSS_ACCESS_KEY_SECRET = env.string('AKEY_PASS', os.getenv('OSS_ACCESS_KEY_SECRET'))
+
+
 SHIPPING_SENDER = {
     'name': "T'estimo By Sari Batubara",
     'mobile': '0811650444',
@@ -961,4 +967,30 @@ DEFAULT_DAYS_AUTO_COMPLETE = env.int('DAYS_COMPLETE', 14)
 GDN_FEE = env.string('GDN_FEE', '10')
 ORDER_NUMBER_PREFIX = env.string('ORDER_NUMBER_PREFIX', 'JMS')
 
-SITE_DESCRIPTION = "T'estimo by Sari Batubara Official adalah Distributor Resmi produk T'estimo by Sari Batubara di Indonesia. T'estimo by Sari Batubara adalah Brand ternama dari Shanghai dengan produk yang sudah import hingga go International, termasuk Indonesia."
+SITE_DESCRIPTION = "T'estimo by Sari Batubara Official"
+
+# IMAGE THUMB SIZE
+PRODUCT_IMAGE = {
+    'height': 440,
+    'width': 400
+}
+
+BANNER_IMAGE_DESKTOP = {
+    'height': 1438,
+    'width': 576
+}
+
+BANNER_IMAGE_MOBILE = {
+    'height': 360,
+    'width': 594
+}
+
+BANNER_MINI_IMAGE = {
+    'height': 700,
+    'width': 524
+}
+
+ENDORSEMENT_IMAGE = {
+    'height': 576,
+    'width': 1438
+}

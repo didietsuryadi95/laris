@@ -1,6 +1,7 @@
 from django import forms
 from django.core import exceptions
 from django.utils.translation import ugettext_lazy as _
+from oscar.forms.widgets import ImageInput
 
 from oscar.core.loading import get_class, get_model
 from oscar.forms.widgets import DateTimePickerInput
@@ -104,7 +105,7 @@ def _attr_file_field(attribute):
         label=attribute.name, required=attribute.required)
 
 
-def _attr_image_field(attribute):
+def _attr_get_image_field(attribute):
     return forms.ImageField(
         label=attribute.name, required=attribute.required)
 
@@ -123,7 +124,7 @@ class ProductForm(forms.ModelForm):
         "entity": _attr_entity_field,
         "numeric": _attr_numeric_field,
         "file": _attr_file_field,
-        "image": _attr_image_field,
+        "image": _attr_get_image_field,
     }
 
     class Meta:

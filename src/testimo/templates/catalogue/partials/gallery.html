@@ -36,9 +36,7 @@
                             <div class="gdn-product-detail-image-slide">
                                 <figure>
                                     <picture>
-                                        {% thumbnail image.original "440x400" upscale=False as thumb %}
-                                            <img src="{{ thumb.url }}" alt="{{ product.get_title }}"/>
-                                        {% endthumbnail %}
+                                        <img src="{{ image.get_image }}" alt="{{ product.get_title }}"/>
                                     </picture>
                                 </figure>
                             </div>
@@ -59,9 +57,7 @@
                         <div class="swiper-slide gdn-product-detail-thumb">
                             <figure>
                                 <picture>
-                                    {% thumbnail image.original "200x200" crop="center" as thumb %}
-                                        <img src="{{ thumb.url }}" alt="{{ product.get_title }}"/>
-                                    {% endthumbnail %}
+                                    <img src="{{ image.get_image }}" alt="{{ product.get_title }}"/>
                                 </picture>
                             </figure>
                         </div>
@@ -94,9 +90,7 @@
                 <figure>
                     <picture>
                         {% with image=product.primary_image %}
-                            {% thumbnail image.original "440x400" upscale=False as thumb %}
-                                <img src="{{ thumb.url }}" alt="{{ product.get_title }}"/>
-                            {% endthumbnail %}
+                            <img src="{{ image.get_image }}" alt="{{ product.get_title }}"/>
                         {% endwith %}
                     </picture>
                 </figure>

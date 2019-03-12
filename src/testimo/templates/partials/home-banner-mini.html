@@ -15,9 +15,7 @@
                     <figure>
                         <picture>
                             <a href="{{ banner_data.url }}">
-                                {% thumbnail banner_data.image "700x524" upscale=False as thumb %}
-                                    <img src="{{ thumb.url }}" alt="{{ banner_data.title }}">
-                                {% endthumbnail %}
+                                <img src="{{ banner_data.get_image }}" alt="{{ banner_data.title }}">
                             </a>
                         </picture>
                     </figure>

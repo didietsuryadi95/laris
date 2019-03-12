@@ -1,7 +1,11 @@
+import logging
+
 from django.conf import settings
 from django.template.loader import render_to_string
 from apps.templatetags.utils_tags import get_scheme, get_full_current_site
 from django.contrib.sites.shortcuts import get_current_site
+
+logger = logging.getLogger('testimo')
 
 
 def render_to_string_with_context(template_path, **kwargs):
@@ -23,3 +27,6 @@ def render_to_string_with_context(template_path, **kwargs):
     })
     message = render_to_string(template_path, kwargs)
     return message
+
+
+

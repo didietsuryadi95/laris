@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
+import logging
+import os
+
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 
@@ -13,15 +15,14 @@ from oscar.core.loading import get_model
 from apps.customer.tokens import account_activation_token
 
 from .utils import render_to_string_with_context
-
-import logging
+from .services import construct_remote_filepath, upload_file_to_oss, update_image_upload_status
 
 from celery import task
 
 User = get_user_model()
 Order = get_model('order', 'Order')
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('testimo')
 
 
 @task(name='send_email')
@@ -117,3 +118,13 @@ def send_email_order(status, order_id, current_site=None):
 
     to_email = order.user.email
     send_email.delay(mail_subject, to_email, message_html, message_text)
+
+
+@task(name='upload_image')
+def upload_image(image_type, image_id, options=None):
+    local, remote = construct_remote_filepath(image_type, image_id, options)
+    if os.path.isfile(local):
+        upload_file_to_oss(local, remote)
+        update_image_upload_status(image_type, image_id, remote)
+
+

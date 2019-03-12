@@ -1,11 +1,15 @@
 import random
 
 from django.db import models
+from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import post_delete
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from .utils import file_cleanup
+
+from sorl.thumbnail import get_thumbnail
+from apps.templatetags.api_tags import get_oss_presigned_url
 
 
 class TimesStampedModel(models.Model):
@@ -32,7 +36,9 @@ class BannerEntryQuery(models.QuerySet):
 
 class Banner(TimesStampedModel):
     image_desktop = models.ImageField(_('Image Desktop'), upload_to='campaign/banner/')
+    oss_image_desktop = models.CharField(max_length=200, blank=True, null=True)
     image_mobile = models.ImageField(_('Image Mobile'), upload_to='campaign/banner/')
+    oss_image_mobile = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(_('Title'), max_length=200)
     description = models.TextField(_('Description'), max_length=255)
     url = models.URLField(_('Url'), default='')
@@ -90,6 +96,30 @@ class Banner(TimesStampedModel):
         if obj.image_mobile and self.image_mobile and obj.image_mobile != self.image_mobile:
             obj.image_mobile.delete()
 
+    @property
+    def get_desktop_image(self):
+        image_size = settings.BANNER_IMAGE_DESKTOP
+        height = image_size['height']
+        width = image_size['width']
+        if self.image_desktop:
+            image = get_thumbnail(self.image_desktop, f'{height}x{width}')
+            return image.url
+        if self.oss_image_desktop:
+            return get_oss_presigned_url(self.oss_image_desktop, image_size)
+        return ''
+
+    @property
+    def get_mobile_image(self):
+        image_size = settings.BANNER_IMAGE_MOBILE
+        height = image_size['height']
+        width = image_size['width']
+        if self.image_mobile:
+            image = get_thumbnail(self.image_mobile, f'{height}x{width}')
+            return image.url
+        if self.oss_image_mobile:
+            return get_oss_presigned_url(self.oss_image_mobile, image_size)
+        return ''
+
     def save(self, *args, **kwargs):
         self.remove_on_image_update()
         return super(Banner, self).save(*args, **kwargs)
@@ -116,6 +146,7 @@ class BannerMiniEntryQuery(models.QuerySet):
 
 class BannerMini(TimesStampedModel):
     image = models.ImageField(_('Image'), upload_to='campaign/banner_mini/')
+    oss_image = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(_('Title'), max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     caption = models.TextField(_('Caption'))
@@ -178,6 +209,18 @@ class BannerMini(TimesStampedModel):
             num += 1
         return unique_slug
 
+    @property
+    def get_image(self):
+        image_size = settings.BANNER_MINI_IMAGE
+        height = image_size['height']
+        width = image_size['width']
+        if self.image:
+            image = get_thumbnail(self.image, f'{height}x{width}')
+            return image.url
+        if self.oss_image:
+            return get_oss_presigned_url(self.oss_image, image_size)
+        return ''
+
     def save(self, *args, **kwargs):
         self.remove_on_image_update()
 
@@ -209,6 +252,7 @@ class EndorsementQueryManager(models.QuerySet):
 
 class Endorsement(TimesStampedModel):
     image = models.ImageField(_('Image'), upload_to='campaign/endorsement/')
+    oss_image = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(_('Endorsement Name'), max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     caption = models.TextField(_('Caption'))
@@ -272,6 +316,18 @@ class Endorsement(TimesStampedModel):
             unique_slug = '{}-{}'.format(slug, num)
             num += 1
         return unique_slug
+
+    @property
+    def get_image(self):
+        image_size = settings.ENDORSEMENT_IMAGE
+        height = image_size['height']
+        width = image_size['width']
+        if self.image:
+            image = get_thumbnail(self.image, f'{height}x{width}')
+            return image.url
+        if self.oss_image:
+            return get_oss_presigned_url(self.oss_image, image_size)
+        return ''
 
     def save(self, *args, **kwargs):
         self.remove_on_image_update()
