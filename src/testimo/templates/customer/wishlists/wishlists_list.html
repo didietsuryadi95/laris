@@ -1,5 +1,4 @@
 {% extends "customer/baseaccountpage.html" %}
-{% load thumbnail %}
 {% load i18n %}
 {% load widget_tweaks %}
 {% load i18n %}
@@ -45,24 +44,22 @@
                                     <figure>
                                         {% block product_image %}
                                             {% with image=product.primary_image %}
-                                                {% thumbnail image.original "x155" upscale=False as thumb %}
-                                                    <a href="{{ product.get_absolute_url }}">
-                                                        <picture class="gdn-product-thumb">
-                                                            {% if product.date_created|is_new %}
-                                                                <span
-                                                                    class="right bg-primary text-notice">NEW</span>
-                                                            {% endif %}
-                                                            <span class="open-modal" data-modal="remove-wish-list"
-                                                                  data-href="{% url 'catalogue:ajax-add-delete-wish-list' product.slug product.id %}"
-                                                                  style="background:#fff;z-index: 2; top:2px; left:2px; border-radius: 50%; width: 48px;height: 48px;box-shadow: 0 2px 4px 0 #dcdcdc">
-                                                                <i class="fa fa-trash"
-                                                                   style="padding: 12px 0;text-align: center;vertical-align: middle;"></i>
-                                                            </span>
-                                                            <img src="{{ thumb.url }}"
-                                                                 alt="{{ product.get_title }}">
-                                                        </picture>
-                                                    </a>
-                                                {% endthumbnail %}
+                                                <a href="{{ product.get_absolute_url }}">
+                                                    <picture class="gdn-product-thumb">
+                                                        {% if product.date_created|is_new %}
+                                                            <span
+                                                                class="right bg-primary text-notice">NEW</span>
+                                                        {% endif %}
+                                                        <span class="open-modal" data-modal="remove-wish-list"
+                                                              data-href="{% url 'catalogue:ajax-add-delete-wish-list' product.slug product.id %}"
+                                                              style="background:#fff;z-index: 2; top:2px; left:2px; border-radius: 50%; width: 48px;height: 48px;box-shadow: 0 2px 4px 0 #dcdcdc">
+                                                            <i class="fa fa-trash"
+                                                               style="padding: 12px 0;text-align: center;vertical-align: middle;"></i>
+                                                        </span>
+                                                        <img src="{{ image.get_image }}"
+                                                             alt="{{ product.get_title }}">
+                                                    </picture>
+                                                </a>
                                             {% endwith %}
                                         {% endblock %}
                                         <figcaption>

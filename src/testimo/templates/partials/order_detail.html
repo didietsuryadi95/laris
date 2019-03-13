@@ -1,6 +1,5 @@
 {% load currency_filters %}
 {% load display_tags %}
-{% load thumbnail %}
 {% load reviews_tags %}
 {% load utils_tags %}
 {% load function_tags %}
@@ -160,14 +159,12 @@
                                     <div class="gdn-product-image-small">
                                         <figure>
                                             {% with image=product.primary_image %}
-                                                {% thumbnail image.original "100x100" upscale=False as thumb %}
-                                                    <a href="{{ product.get_absolute_url }}">
-                                                        <picture>
-                                                            <img class="thumbnail" src="{{ thumb.url }}"
-                                                                 alt="{{ product.get_title }}"/>
-                                                        </picture>
-                                                    </a>
-                                                {% endthumbnail %}
+                                                <a href="{{ product.get_absolute_url }}">
+                                                    <picture>
+                                                        <img class="thumbnail" src="{{ image.get_image }}"
+                                                             alt="{{ product.get_title }}" height="100" width="100"/>
+                                                    </picture>
+                                                </a>
                                             {% endwith %}
                                         </figure>
                                     </div>

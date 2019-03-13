@@ -125,6 +125,6 @@ def upload_image(image_type, image_id, options=None):
     local, remote = construct_remote_filepath(image_type, image_id, options)
     if os.path.isfile(local):
         upload_file_to_oss(local, remote)
-        update_image_upload_status(image_type, image_id, remote)
+        update_image_upload_status(image_type, image_id, remote, options)
 
 

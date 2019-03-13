@@ -9,6 +9,7 @@ django-meta==1.4.1
 django-select2==6.3.1
 python-memcached==1.59
 django-static-sitemaps==4.6.0
+oss2==2.4.0
 
 # semi-optional requirements (oscar)
 django_compressor==2.2

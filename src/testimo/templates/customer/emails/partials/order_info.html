@@ -1,5 +1,4 @@
 {% load currency_filters i18n %}
-{% load thumbnail %}
 {% load staticfiles %}
 {% load utils_tags %}
 {% load function_tags %}
@@ -122,18 +121,17 @@
                                                 <th style="width:90px;" rowspan="1">
                                                     <p style="width: 78px;margin-right: 5px;height: 78px;position: relative;">
                                                         {% with image=line.product.primary_image %}
-                                                            {% thumbnail image.original "100x100" upscale=False as thumb %}
-                                                                <img
-                                                                    style="border:1px solid #e6e6e6;max-height: 100%;max-width: 100%; position:absolute; top: 0; bottom: 0; left:0; right: 0;margin: auto;"
-                                                                    width="100%"
-                                                                    src="
+                                                            <img
+                                                                style="border:1px solid #e6e6e6;max-height: 100%;max-width: 100%; position:absolute; top: 0; bottom: 0; left:0; right: 0;margin: auto;"
+                                                                width="100"
+                                                                height="100"
+                                                                src="
 
 
 
 
-                                                                        {% get_scheme %}{{ order.site.domain }}{{ thumb.url }}"
-                                                                    alt="{{ line.product.get_title }}">
-                                                            {% endthumbnail %}
+                                                                    {{ image.get_image }}"
+                                                                alt="{{ line.product.get_title }}">
                                                         {% endwith %}
                                                     </p>
                                                 </th>

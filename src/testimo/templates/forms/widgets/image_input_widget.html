@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load thumbnail %}
 
 <div id="{{ image_id }}" class="image-input">
     {% if image_url %}
@@ -11,6 +10,6 @@
         <button class="btn btn-primary" id="upload_button_{{ image_id }}">{% trans "Upload Image" %}</button>
     {% endif %}
     <div class="input-field">
-        {% include "django/forms/widgets/input.html" %}
+        {% include "forms/widgets/input.html" %}
     </div>
 </div>

@@ -1,5 +1,3 @@
-{% load thumbnail %}
-
 {% if record.get_image %}
     <a href="{{ record.url }}" target="_blank">
         <img src="{{ record.get_image }}" alt="{{ record.image.name }}" width="70" height="70" >

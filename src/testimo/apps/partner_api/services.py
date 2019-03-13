@@ -12,28 +12,35 @@ Endorsement = get_model('campaign', 'Endorsement')
 
 logger = logging.getLogger('testimo')
 
+const_product = 'product'
+const_banner = 'banner'
+const_bannermini = 'bannermini'
+const_endorsement = 'endorsement'
+const_mobile = 'mobile'
+const_desktop = 'desktop'
+
 
 def construct_remote_filepath(image_type, image_id, options=None):
     """Using some input constructing folder structure in cloud storage"""
     local_path = None
     remote_path = None
-    if image_type == 'product':
+    if image_type == const_product:
         img = ProductImage.objects.get(pk=image_id)
         local_path = img.original.path
         remote_path = img.original.name
-    elif image_type == 'banner':
+    elif image_type == const_banner:
         img = Banner.objects.get(pk=image_id)
-        if options == 'desktop':
+        if options == const_desktop:
             local_path = img.image_desktop.path
             remote_path = img.image_desktop.name
-        elif options == 'mobile':
+        elif options == const_mobile:
             local_path = img.image_mobile.path
             remote_path = img.image_mobile.name
-    elif image_type == 'bannermini':
+    elif image_type == const_bannermini:
         img = BannerMini.objects.get(pk=image_id)
         local_path = img.image.path
         remote_path = img.image.name
-    elif image_type == 'endorsement':
+    elif image_type == const_endorsement:
         img = Endorsement.objects.get(pk=image_id)
         local_path = img.image.path
         remote_path = img.image.name
@@ -44,27 +51,27 @@ def construct_remote_filepath(image_type, image_id, options=None):
 
 
 def update_image_upload_status(image_type, image_id, remote_url, options=None):
-    if image_type == 'product':
+    if image_type == const_product:
         img = ProductImage.objects.get(pk=image_id)
         img.original.delete()
         img.oss_image = remote_url
         img.save()
-    elif image_type == 'banner':
+    elif image_type == const_banner:
         img = Banner.objects.get(pk=image_id)
-        if options == 'desktop':
+        if options == const_desktop:
             img.image_desktop.delete()
             img.oss_image_desktop = remote_url
             img.save()
-        elif options == 'mobile':
+        elif options == const_mobile:
             img.image_mobile.delete()
             img.oss_image_mobile = remote_url
             img.save()
-    elif image_type == 'bannermini':
+    elif image_type == const_bannermini:
         img = BannerMini.objects.get(pk=image_id)
         img.image.delete()
         img.oss_image = remote_url
         img.save()
-    elif image_type == 'endorsement':
+    elif image_type == const_endorsement:
         img = Endorsement.objects.get(pk=image_id)
         img.image.delete()
         img.oss_image = remote_url
