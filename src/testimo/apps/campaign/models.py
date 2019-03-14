@@ -102,8 +102,11 @@ class Banner(TimesStampedModel):
         height = image_size['height']
         width = image_size['width']
         if self.image_desktop:
-            image = get_thumbnail(self.image_desktop, f'{height}x{width}')
-            return image.url
+            try:
+                image = get_thumbnail(self.image_desktop, f'{height}x{width}')
+                return image.url
+            except:
+                return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image_desktop:
             return get_oss_presigned_url(self.oss_image_desktop, image_size)
         return ''
@@ -114,8 +117,11 @@ class Banner(TimesStampedModel):
         height = image_size['height']
         width = image_size['width']
         if self.image_mobile:
-            image = get_thumbnail(self.image_mobile, f'{height}x{width}')
-            return image.url
+            try:
+                image = get_thumbnail(self.image_mobile, f'{height}x{width}')
+                return image.url
+            except:
+                return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image_mobile:
             return get_oss_presigned_url(self.oss_image_mobile, image_size)
         return ''
@@ -215,8 +221,11 @@ class BannerMini(TimesStampedModel):
         height = image_size['height']
         width = image_size['width']
         if self.image:
-            image = get_thumbnail(self.image, f'{height}x{width}')
-            return image.url
+            try:
+                image = get_thumbnail(self.image, f'{height}x{width}')
+                return image.url
+            except:
+                return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image:
             return get_oss_presigned_url(self.oss_image, image_size)
         return ''
@@ -323,8 +332,11 @@ class Endorsement(TimesStampedModel):
         height = image_size['height']
         width = image_size['width']
         if self.image:
-            image = get_thumbnail(self.image, f'{height}x{width}')
-            return image.url
+            try:
+                image = get_thumbnail(self.image, f'{height}x{width}')
+                return image.url
+            except:
+                return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image:
             return get_oss_presigned_url(self.oss_image, image_size)
         return ''

@@ -7,22 +7,28 @@ Banner = get_model('campaign', 'Banner')
 BannerMini = get_model('campaign', 'BannerMini')
 Endorsement = get_model('campaign', 'Endorsement')
 
+BANNER = 'banner'
+BANNERMINI = 'bannermini'
+ENDORSEMENT = 'endorsement'
+MOBILE = 'mobile'
+DESKTOP = 'desktop'
+
 
 @receiver(post_save, sender=Banner)
 def upload_image_banner(sender, instance, created, **kwargs):
     if instance.image_desktop:
-        upload_image.delay('banner', instance.id, 'desktop')
+        upload_image.delay(BANNER, instance.id, DESKTOP)
     if instance.image_mobile:
-        upload_image.delay('banner', instance.id, 'mobile')
+        upload_image.delay(BANNER, instance.id, MOBILE)
 
 
 @receiver(post_save, sender=BannerMini)
 def upload_image_banner_mini(sender, instance, created, **kwargs):
     if instance.image:
-        upload_image.delay('bannermini', instance.id)
+        upload_image.delay(BANNERMINI, instance.id)
 
 
 @receiver(post_save, sender=Endorsement)
 def upload_image_endorsement(sender, instance, created, **kwargs):
     if instance.image:
-        upload_image.delay('endorsement', instance.id)
+        upload_image.delay(ENDORSEMENT, instance.id)

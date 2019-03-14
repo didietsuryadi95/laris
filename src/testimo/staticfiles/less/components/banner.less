@@ -1,0 +1,24 @@
+.banner{
+  &-mini{
+    max-width: 488px;
+    height: 472px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    @media screen and (max-width: @m-break) {
+      height: 156px;
+    }
+
+    > img{
+      min-width: 100%;
+      height: auto;
+      /* IE 8 */
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+      /* IE 5-7 */
+      filter: alpha(opacity=0);
+      /* modern browsers */
+      opacity: 0;
+    }
+  }
+
+}

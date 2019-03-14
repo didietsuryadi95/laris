@@ -154,6 +154,8 @@ class Product(ModelMeta, AbstractProduct):
 
 
 class ProductImage(AbstractProductImage):
+    original = models.ImageField(
+        _("Original"), upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255, blank=True, null=True)
     oss_image = models.CharField(max_length=200, blank=True, null=True)
 
     @property
@@ -162,8 +164,11 @@ class ProductImage(AbstractProductImage):
         height = image_size['height']
         width = image_size['width']
         if self.original:
-            image = get_thumbnail(self.original, f'{height}x{width}')
-            return image.url
+            try:
+                image = get_thumbnail(self.original, f'{height}x{width}')
+                return image.url
+            except:
+                return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image:
             return get_oss_presigned_url(self.oss_image, image_size)
         return ''

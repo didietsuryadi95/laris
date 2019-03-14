@@ -91,7 +91,7 @@
 
 .btn-primary {
     // color || background || border color
-    .button-variant(@black; @primary; @primary);
+    .button-variant(@white; @primary; @primary);
 }
 
 
@@ -225,8 +225,8 @@ input[type="button"] {
         outline: none;
     }
     &:hover {
-        color: @color;
-        background-color: darken(@background, 10%);
+        color: @primary;
+        background-color: @white;
         border-color: darken(@border, 10%);
     }
     &:active,

@@ -978,19 +978,24 @@ META_USE_GOOGLEPLUS_PROPERTIES = True
 DEFAULT_DAYS_AUTO_CANCELED = env.int('DAYS_CANCELED', 1)
 DEFAULT_DAYS_AUTO_COMPLETE = env.int('DAYS_COMPLETE', 14)
 GDN_FEE = env.string('GDN_FEE', '10')
-ORDER_NUMBER_PREFIX = env.string('ORDER_NUMBER_PREFIX', 'JMS')
+ORDER_NUMBER_PREFIX = env.string('ORDER_NUMBER_PREFIX', 'TES')
 
 SITE_DESCRIPTION = "T'estimo by Sari Batubara Official"
 
+
 # IMAGE THUMB SIZE
+IMAGE_QUALITY = 90
+IMAGE_FORMAT = 'webp'
+IMAGE_NOT_FOUND_PATH = '/uploads/image-not-found.png'
+
 PRODUCT_IMAGE = {
-    'height': 440,
-    'width': 400
+    'height': 880,
+    'width': 800
 }
 
 BANNER_IMAGE_DESKTOP = {
-    'height': 576,
-    'width': 1438
+    'height': 694,
+    'width': 1366
 }
 
 BANNER_IMAGE_MOBILE = {
