@@ -70,6 +70,7 @@
                             {% get_payment_method "credit_card" as credit_card %}
                             {% get_image_bank "credit_card" as credit_card_image %}
                             {% if virtual_account %}
+                                <div id="payment-info-va" data-payment="{% virtual_account_terms virtual_account %}"></div>
                                 <li class="basket-method-box-row display-block">
                                     <label
                                         id="virtual-account"
@@ -102,10 +103,12 @@
                                                 <option value="{{ va.code }}">{{ va.name }}</option>
                                             {% endfor %}
                                         </select>
+                                        <div id="virtual-account-condition" class="text-grey"></div>
                                     </div>
                                 </li>
                             {% endif %}
                             {% if credit_card %}
+                                <div id="payment-info-cc" data-payment="{% virtual_account_terms credit_card %}"></div>
                                 <li class="basket-method-box-row display-block">
                                     <label
                                         id="credit-card"
@@ -138,6 +141,7 @@
                                                 <option value="{{ va.code }}">{{ va.name }}</option>
                                             {% endfor %}
                                         </select>
+                                        <div id="credit-account-condition" class="text-grey"></div>
                                     </div>
                                 </li>
                             {% endif %}

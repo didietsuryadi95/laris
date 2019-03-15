@@ -521,7 +521,14 @@ $(".gdn-accordian label.gdn-accordian-btn, .gdn-accordian a.gdn-accordian-btn").
                 $(this).siblings().find("select.method-payment-chooose").val("");
             }
             if ($(this).attr('id') === "credit-card") {
+                const termsHtml = $("#payment-info-cc").data('payment');
                 $('button#checkout-step[type="submit"]').prop('disabled', false);
+                value = $("#credit-card-select option:first").val();
+                if (value in termsHtml){
+                    $('#credit-account-condition').html(termsHtml[value]);
+                }else{
+                    $('#credit-account-condition').html('');
+                }
             }
             $(".check-accordian").prop('checked', false);
             $("select.method-payment-chooose").prop('disabled', true);
@@ -680,6 +687,7 @@ $("#click-append").on("click", function (event) {
 $(".remove-voucher").on("click", function (e) {
     e.preventDefault()
     if ($(this).data('action')) {
+        $(this).attr('disabled', 'disabled');
         $("form#form-delete-voucher").attr("action", $(this).data('action'));
         $("form#form-delete-voucher").submit()
     }

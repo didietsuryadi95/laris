@@ -1,5 +1,5 @@
 import logging
-import oss2
+from urllib.parse import quote
 
 from django import template
 from django.conf import settings
@@ -10,19 +10,16 @@ logger = logging.getLogger('testimo')
 
 
 @register.simple_tag()
-def get_oss_presigned_url(remote_filepath, resize=None, bucket_name=settings.OSS_BUCKET_NAME, expires_in_seconds=3600):
-    endpoint = settings.OSS_ENDPOINT
-    auth = oss2.Auth(settings.OSS_ACCESS_KEY_ID, settings.OSS_ACCESS_KEY_SECRET)
-    bucket = oss2.Bucket(auth, endpoint, bucket_name)
-    extra_params = {}
-    extra_headers = {'Cache-Control': 'max-age=31536000'}
+def get_oss_presigned_url(remote_filepath, resize=None):
+    extra_params = ""
+    self_domain = settings.HOSTNAME
     if resize:
-        extra_params = {"x-oss-process": f"image/resize,m_fill,h_{resize['height']},w_{resize['width']}"
-                        f"/quality,q_{settings.IMAGE_QUALITY}/format,{settings.IMAGE_FORMAT}"}
-    url = bucket.sign_url('GET', remote_filepath, expires_in_seconds, headers=extra_headers, params=extra_params)
+        params = f"image/resize,m_fill,h_{resize['height']},w_{resize['width']}" \
+            f"/quality,q_{settings.IMAGE_QUALITY}/format,{settings.IMAGE_FORMAT}"
+        extra_params = f"?x-oss-process={quote(params, safe='')}"
+    url = f"{self_domain}{quote(remote_filepath, safe='')}{extra_params}"
     logger.info({
-        'bucket_name': bucket_name,
         'remote_filepath': remote_filepath,
         'url': url
     })
-    return url.split('&OSSAccessKeyId')[0]
+    return url

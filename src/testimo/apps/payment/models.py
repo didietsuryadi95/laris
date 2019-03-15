@@ -32,6 +32,7 @@ class SourceType(AbstractSourceType):
     gdn_bank_fee = models.DecimalField(_("GDN Bank Fee"), max_digits=11, default=0, decimal_places=2)
     amount_fee = models.DecimalField(_("IPay88 Amount Fee"), max_digits=11, default=0, decimal_places=2)
     gdn_amount_fee = models.DecimalField(_("GDN Amount Fee"), max_digits=11, default=0, decimal_places=2)
+    terms = models.TextField(_("Terms & Conditions"), blank=True, null=True)
 
     objects = SourceTypeManager()
 

@@ -962,10 +962,10 @@ var oscar = (function (o, $) {
     };
     o.onValidationPaymentDetails = {
         init: function (options) {
-            console.log('woiiii')
             const urlParams = new URLSearchParams(window.location.search);
             const paymentMethod = urlParams.get('payment-method');
             const payments = urlParams.get('payments');
+            const termsHtml = $("#payment-info-va").data('payment');
             if (paymentMethod && payments) {
                 console.log("masookkk")
                 let paymentResult = o.onValidationPaymentDetails.checkPaymentAvailable(paymentMethod, payments, options);
@@ -985,7 +985,12 @@ var oscar = (function (o, $) {
             }
             $('select.method-payment-chooose').on("change", function (event) {
                 var value = $(this).val();
-                console.log(value)
+                console.log(value);
+                if (value in termsHtml){
+                    $('#virtual-account-condition').html(termsHtml[value]);
+                }else{
+                    $('#virtual-account-condition').html('');
+                }
                 if (value.length > 0) {
                     $('button#checkout-step[type="submit"]').prop('disabled', false);
                 } else {

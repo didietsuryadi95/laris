@@ -1,3 +1,5 @@
+import json
+
 from decimal import Decimal
 from django import template
 from django.conf import settings
@@ -340,4 +342,11 @@ def currency_decimal_point(value, currency='IDR'):
 def ipay_amount_formater(amount):
     rounded = round(amount)
     return '{:.2f}'.format(rounded).replace('.', '')
+
+@register.simple_tag()
+def virtual_account_terms(va):
+    va_terms = {}
+    for v in va:
+        va_terms[v.code] = v.terms
+    return json.dumps(va_terms)
 
