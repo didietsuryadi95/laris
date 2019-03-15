@@ -104,11 +104,12 @@ pipeline
             {
             script
             {
+                def branch_name = env.BRANCH_NAME.replaceAll('\\/','-')
                 def cmd = """
                 PIPE=\$(mktemp -u);
                 mkfifo \$PIPE;
                 (echo '${jimshoney}' >\$PIPE &);
-                ansible-playbook ./deploy/omnibus.yml -i ./deploy/environments/production --extra-vars "app_role_sphinx=production" --vault-password-file=\$PIPE || (
+                ansible-playbook ./deploy/omnibus.yml -i ./deploy/environments/production --extra-vars 'repo_ref=${branch_name}' --vault-password-file=\$PIPE || (
                 RC=\$?;
                 rm \$PIPE;
                 exit \$RC
