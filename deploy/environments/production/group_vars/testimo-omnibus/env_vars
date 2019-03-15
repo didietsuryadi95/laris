@@ -63,7 +63,6 @@ SOLR_HOST : "10.10.235.222"
 nfs_host: "10.10.235.235"
 DEBUG: "False"
 debug_email: ""
-max_con: 1000
 
 app_vars:
     - { name: DB_URI_PASS, value: "postgresql://{{ app_name }}:{{ tes_db_pass }}@{{ tes_db_host }}:5432/{{ app_name }}"}

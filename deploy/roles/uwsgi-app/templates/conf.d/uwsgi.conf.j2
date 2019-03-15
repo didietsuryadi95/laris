@@ -49,6 +49,10 @@ server {
     ssl_prefer_server_ciphers on;
     ssl_ciphers "ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS";
 
+    # OCSP stapling
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 1.1.1.1 1.0.0.1 [2606:4700:4700::1111] [2606:4700:4700::1001]; # Cloudflare
 
 
     location / {
@@ -64,7 +68,7 @@ server {
         keepalive_timeout       0;
     }
 
-    location /uploads {
+    location /thumb {
     expires 30d;
     add_header Cache-Control "public, max-age=31536000";
     proxy_pass https://dev-{{ app_name }}.{{ oss_endpoint }};
@@ -73,7 +77,7 @@ server {
     {% for loc in http_static_locations %}
     location {{ loc.http_path }} {
     expires 30d;
-    add_header Cache-Control "public";
+    add_header Cache-Control "public, max-age=31536000";
         alias {{ loc.dir_path }};
     }
     {% endfor %}
@@ -128,16 +132,16 @@ server {
         keepalive_timeout       0;
     }
 
-    location /uploads {
+    location /thumb/uploads {
     expires 30d;
     add_header Cache-Control "public, max-age=31536000";
-    proxy_pass https://{{ app_name }}.{{ oss_endpoint }};
+    proxy_pass https://{{ app_name }}.{{ oss_endpoint }}/uploads;
     }
 
     {% for loc in http_static_locations %}
     location {{ loc.http_path }} {
     expires 1y;
-    add_header Cache-Control "public";
+    add_header Cache-Control "public, max-age=31536000";
         alias {{ loc.dir_path }};
     }
     {% endfor %}

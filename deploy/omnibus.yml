@@ -16,6 +16,9 @@
     #rabbitmq vars
     rabbitpass: "{{ rabbit_pass }}"
 
+    #somax.conn
+    max_con: 65535
+
     APP_ENV_PREFIX: TES
 
     #celery vars
@@ -51,6 +54,8 @@
       http_static_locations:
         - http_path: '/static'
           dir_path: '{{ workdir }}/static'
+        - http_path: '/uploads'
+          dir_path: '{{ workdir }}/uploads'
     - role: apps/newrelic
       when: app_role == "production"
   become: yes
