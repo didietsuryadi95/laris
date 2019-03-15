@@ -642,7 +642,7 @@ OSS_ENDPOINT = env.string('ENDPOINT', os.getenv('OSS_ENDPOINT'))
 OSS_BUCKET_NAME = env.string('BUCKET_NAME', os.getenv('OSS_BUCKET_NAME'))
 OSS_ACCESS_KEY_ID = env.string('AKEY_ID', os.getenv('OSS_ACCESS_KEY_ID'))
 OSS_ACCESS_KEY_SECRET = env.string('AKEY_PASS', os.getenv('OSS_ACCESS_KEY_SECRET'))
-HOSTNAME = env.string('HOSTNAME', f"https://dev-{APP_NAME}.{OSS_ENDPOINT}/")
+HOSTNAME = env.string('HOSTNAME', f"https://dev-{APP_NAME}.gramedia.io/")
 
 
 SHIPPING_SENDER = {
@@ -988,6 +988,7 @@ SITE_DESCRIPTION = "T'estimo by Sari Batubara Official"
 IMAGE_QUALITY = 90
 IMAGE_FORMAT = 'webp'
 IMAGE_NOT_FOUND_PATH = '/uploads/image-not-found.png'
+OSCAR_MISSING_IMAGE_URL = 'image-not-found.png'
 
 PRODUCT_IMAGE = {
     'height': 880,
