@@ -132,10 +132,10 @@ server {
         keepalive_timeout       0;
     }
 
-    location /thumb {
+    location /thumb/uploads {
     expires 30d;
     add_header Cache-Control "public, max-age=31536000";
-    proxy_pass https://{{ app_name }}.{{ oss_endpoint }};
+    proxy_pass https://{{ app_name }}.{{ oss_endpoint }}/uploads;
     }
 
     {% for loc in http_static_locations %}
