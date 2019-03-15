@@ -97,6 +97,6 @@ app_vars:
     - { name: MCHIMP_API_PASS, value: "{{ mchimp_key }}"}
     - { name: MCHIMP_LIST_ID, value: "{{ mchimp_list }}"}
     - { name: DAYS_COMPLETE, value: "{{ days_complete }}"}
-    - { name: HOSTNAME, value: "{{ http_hostname }}"}
+    - { name: HOSTNAME, value: "https://{{ http_hostname }}"}/
 
 letsencrypt_email: devops@gramedia.digital
