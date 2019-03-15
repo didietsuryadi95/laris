@@ -64,7 +64,7 @@ server {
         keepalive_timeout       0;
     }
 
-    location /uploads {
+    location /thumb {
     expires 30d;
     add_header Cache-Control "public, max-age=31536000";
     proxy_pass https://dev-{{ app_name }}.{{ oss_endpoint }};
@@ -73,7 +73,7 @@ server {
     {% for loc in http_static_locations %}
     location {{ loc.http_path }} {
     expires 30d;
-    add_header Cache-Control "public";
+    add_header Cache-Control "public, max-age=31536000";
         alias {{ loc.dir_path }};
     }
     {% endfor %}
@@ -128,7 +128,7 @@ server {
         keepalive_timeout       0;
     }
 
-    location /uploads {
+    location /thumb {
     expires 30d;
     add_header Cache-Control "public, max-age=31536000";
     proxy_pass https://{{ app_name }}.{{ oss_endpoint }};
@@ -137,7 +137,7 @@ server {
     {% for loc in http_static_locations %}
     location {{ loc.http_path }} {
     expires 1y;
-    add_header Cache-Control "public";
+    add_header Cache-Control "public, max-age=31536000";
         alias {{ loc.dir_path }};
     }
     {% endfor %}
