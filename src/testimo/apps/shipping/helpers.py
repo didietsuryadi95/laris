@@ -37,8 +37,8 @@ def calculate_kgx(result, basket, postcode):
 def result_kgx(weight, result, basket_currency, postcode):
     kgx_client = get_kgx_client()
     kgx_rate = kgx_client.check_rate(postcode, weight)
-    if kgx_rate and kgx_rate['status'] == 200:
-        kgx_data = kgx_rate['data']['services']['reg']
+    kgx_data = kgx_rate['data']['services']['reg']
+    if kgx_rate and kgx_rate['status'] == 200 and kgx_data.get('FinalCost', None):
         final_cost = kgx_data['FinalCost']
         min_day = kgx_data['MinLeadTime']
         max_day = kgx_data['MaxLeadTime']

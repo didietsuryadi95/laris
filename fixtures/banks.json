@@ -1,17 +1,6 @@
 [
     {
         "model": "payment.sourcetype",
-        "pk": 1,
-        "fields": {
-            "name": "BCA Virtual Account",
-            "code": "25",
-            "image": "/img/bank/bca.png",
-            "is_active": true,
-            "source_type": "virtual_account"
-        }
-    },
-    {
-        "model": "payment.sourcetype",
         "pk": 2,
         "fields": {
             "name": "BNI Virtual Account",
