@@ -162,7 +162,7 @@ class Product(ModelMeta, AbstractProduct):
                 'original': self.get_missing_image(),
                 'caption': '',
                 'is_missing': True,
-                'get_image': self.get_missing_image()
+                'get_image': settings.IMAGE_NOT_FOUND_PATH
             }
 
     # ==========
