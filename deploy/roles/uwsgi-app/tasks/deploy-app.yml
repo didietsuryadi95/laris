@@ -76,39 +76,6 @@
    become: true
    become_user: "{{ app_user }}"
 
-# Nfs
-
- - name: (Production) insert/update "fstab" configuration block in /etc/fstab
-   blockinfile:
-     path: /etc/fstab
-     block: |
-       {{ nfs_host }}:{{ oss_mnt_point }} {{ oss_mnt_point }} nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
-   when: (app_role == "production")
-
- - name: (Production) Check if nfs uploads directory already exist
-   stat:
-     path: "{{ oss_mnt_point }}/uploads"
-   register: uploads
-   when: (app_role == "production")
-
- - name: (Production) Make Nfs Uploads directory exists
-   file:
-     path: "{{ oss_mnt_point }}/uploads"
-     state: directory
-     owner: "{{ app_user }}"
-     group: www-data
-     recurse: yes
-     mode: 0777
-   when: (app_role == "production" and uploads.stat.exists == False )
-
- - name: (Production) Make sure Uploads Symlink
-   file:
-     dest: /srv/{{ app_user }}/www/src/{{ app_user }}/uploads
-     src: "{{ oss_mnt_point }}/uploads"
-     state: link
-     force: yes
-   when: (app_role == "production")
-
  - name: Make sure static and uploads directory exists
    file:
      path: /srv/{{ app_user }}/www/src/{{ app_user }}/{{ item }}
@@ -119,7 +86,6 @@
    with_items:
     - static
     - uploads
-   when: (app_role != "production")
 
  - name: Chown uploads
    file:
