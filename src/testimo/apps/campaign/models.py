@@ -98,32 +98,26 @@ class Banner(TimesStampedModel):
 
     @property
     def get_desktop_image(self):
-        image_size = settings.BANNER_IMAGE_DESKTOP
-        height = image_size['height']
-        width = image_size['width']
         if self.image_desktop:
             try:
-                image = get_thumbnail(self.image_desktop, f'{height}x{width}')
+                image = get_thumbnail(self.image_desktop, settings.BANNER_IMAGE_DESKTOP)
                 return image.url
             except:
                 return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image_desktop:
-            return get_oss_presigned_url(self.oss_image_desktop, image_size)
+            return get_oss_presigned_url(self.oss_image_desktop, settings.BANNER_IMAGE_DESKTOP_STYLE)
         return ''
 
     @property
     def get_mobile_image(self):
-        image_size = settings.BANNER_IMAGE_MOBILE
-        height = image_size['height']
-        width = image_size['width']
         if self.image_mobile:
             try:
-                image = get_thumbnail(self.image_mobile, f'{height}x{width}')
+                image = get_thumbnail(self.image_mobile, settings.BANNER_IMAGE_MOBILE)
                 return image.url
             except:
                 return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image_mobile:
-            return get_oss_presigned_url(self.oss_image_mobile, image_size)
+            return get_oss_presigned_url(self.oss_image_mobile, settings.BANNER_IMAGE_MOBILE_STYLE)
         return ''
 
     def save(self, *args, **kwargs):
@@ -217,17 +211,14 @@ class BannerMini(TimesStampedModel):
 
     @property
     def get_image(self):
-        image_size = settings.BANNER_MINI_IMAGE
-        height = image_size['height']
-        width = image_size['width']
         if self.image:
             try:
-                image = get_thumbnail(self.image, f'{height}x{width}')
+                image = get_thumbnail(self.image, settings.BANNER_MINI_IMAGE)
                 return image.url
             except:
                 return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image:
-            return get_oss_presigned_url(self.oss_image, image_size)
+            return get_oss_presigned_url(self.oss_image, settings.BANNER_MINI_IMAGE_STYLE)
         return ''
 
     def save(self, *args, **kwargs):
@@ -328,17 +319,14 @@ class Endorsement(TimesStampedModel):
 
     @property
     def get_image(self):
-        image_size = settings.ENDORSEMENT_IMAGE
-        height = image_size['height']
-        width = image_size['width']
         if self.image:
             try:
-                image = get_thumbnail(self.image, f'{height}x{width}')
+                image = get_thumbnail(self.image, settings.ENDORSEMENT_IMAGE)
                 return image.url
             except:
                 return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image:
-            return get_oss_presigned_url(self.oss_image, image_size)
+            return get_oss_presigned_url(self.oss_image, settings.ENDORSEMENT_IMAGE_STYLE)
         return ''
 
     def save(self, *args, **kwargs):

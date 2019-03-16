@@ -183,17 +183,14 @@ class ProductImage(AbstractProductImage):
 
     @property
     def get_image(self):
-        image_size = settings.PRODUCT_IMAGE
-        height = image_size['height']
-        width = image_size['width']
         if self.original:
             try:
-                image = get_thumbnail(self.original, f'{height}x{width}')
+                image = get_thumbnail(self.original, settings.PRODUCT_IMAGE)
                 return image.url
             except:
                 return settings.IMAGE_NOT_FOUND_PATH
         if self.oss_image:
-            return get_oss_presigned_url(self.oss_image, image_size)
+            return get_oss_presigned_url(self.oss_image, settings.PRODUCT_IMAGE_STYLE)
         return ''
 
 

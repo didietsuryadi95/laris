@@ -990,27 +990,14 @@ IMAGE_FORMAT = 'webp'
 IMAGE_NOT_FOUND_PATH = '/uploads/image-not-found.png'
 OSCAR_MISSING_IMAGE_URL = 'image-not-found.png'
 
-PRODUCT_IMAGE = {
-    'height': 880,
-    'width': 800
-}
+PRODUCT_IMAGE = '880x800'
+BANNER_IMAGE_DESKTOP = '694x1366'
+BANNER_IMAGE_MOBILE = '594x360'
+BANNER_MINI_IMAGE = '700x524'
+ENDORSEMENT_IMAGE = '576x1438'
 
-BANNER_IMAGE_DESKTOP = {
-    'height': 694,
-    'width': 1366
-}
-
-BANNER_IMAGE_MOBILE = {
-    'height': 594,
-    'width': 360
-}
-
-BANNER_MINI_IMAGE = {
-    'height': 700,
-    'width': 524
-}
-
-ENDORSEMENT_IMAGE = {
-    'height': 576,
-    'width': 1438
-}
+PRODUCT_IMAGE_STYLE = 'product'
+BANNER_IMAGE_DESKTOP_STYLE = 'desktop'
+BANNER_IMAGE_MOBILE_STYLE = 'mobile'
+BANNER_MINI_IMAGE_STYLE = 'banner'
+ENDORSEMENT_IMAGE_STYLE = 'endorse'
