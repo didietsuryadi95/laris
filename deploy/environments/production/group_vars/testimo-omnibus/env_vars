@@ -7,7 +7,7 @@ repo_version: master
 
 py_version: 3.6
 
-tes_db_host: "10.10.235.223"
+tes_db_host: "10.10.2.84"
 tes_db_pass: "{{ vault_tes_db_pass }}"
 
 newrelic_api_key: "{{ vault_newrelic_api_key }}"
@@ -39,16 +39,13 @@ ses_port: 587
 ses_tls: True
 ses_email: ""
 
-#gdn_fee
-gdn_fee: "10"
-
 #MAILCHIMP
 mchimp_list: "b55ee700b6"
 mchimp_key: "{{ vault_mchimp_key }}"
 
 #ipay
 ipay_url: "https://payment.ipay88.co.id/epayment/entry.asp"
-ipay_code: "ID00757_S0001"
+ipay_code: "ID00757_S0004"
 ipay_key: "{{ vault_ipay_key }}"
 
 #OSS
@@ -59,7 +56,7 @@ oss_region: "ap-southeast-5"
 oss_intranet: "oss-ap-southeast-5-internal.aliyuncs.com"
 oss_endpoint: "oss-ap-southeast-5.aliyuncs.com"
 oss_mnt_point: "/srv/oss"
-SOLR_HOST : "10.10.235.222"
+SOLR_HOST : "10.10.2.83"
 nfs_host: "10.10.235.235"
 DEBUG: "False"
 debug_email: ""

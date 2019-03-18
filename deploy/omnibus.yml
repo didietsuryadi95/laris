@@ -19,6 +19,9 @@
     #somax.conn
     max_con: 65535
 
+    #gdn_fee
+    gdn_fee: "8"
+
     APP_ENV_PREFIX: TES
 
     #celery vars
