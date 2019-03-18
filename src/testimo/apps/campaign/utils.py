@@ -14,11 +14,10 @@ def file_cleanup(sender, **kwargs):
             inst = kwargs['instance']
             f = getattr(inst, fieldname)
             m = inst.__class__._default_manager
-            if hasattr(f, 'path') and os.path.exists(f.path) \
+            if bool(f) and hasattr(f, 'path') and os.path.exists(f.path) \
                 and not m.filter(**{'%s__exact' % fieldname: getattr(inst, fieldname)})\
-                .exclude(pk=inst._get_pk_val()):
+                    .exclude(pk=inst._get_pk_val()):
                     try:
-                        #os.remove(f.path)
                         default_storage.delete(f.path)
                     except:
                         pass
