@@ -7,7 +7,7 @@ repo_version: master
 
 py_version: 3.6
 
-tes_db_host: "{{ vault_tes_db_host }}"
+tes_db_host: localhost
 tes_db_pass: "{{ vault_tes_db_pass }}"
 newrelic_api_key: "{{ vault_newrelic_api_key }}"
 
@@ -24,7 +24,6 @@ log_handler: "graypy.GELFHandler"
 celery_loglevel: CRITICAL
 days_complete: 1
 
-
 #KGX
 kgx_user: "{{ vault_kgx_user }}"
 kgx_pass: "{{ vault_kgx_pass }}"
@@ -38,9 +37,6 @@ ses_url: "smtp.mailtrap.io"
 ses_port: 2525
 ses_tls: True
 
-#gdn_fee
-gdn_fee: "10"
-
 #MAILCHIMP
 mchimp_list: "6a7d1b67f8"
 mchimp_key: "{{ vault_mchimp_key }}"
@@ -53,7 +49,7 @@ ipay_key: "{{ vault_ipay_key }}"
 #OSS
 access_key: "{{ vault_oss_ak }}"
 secret_access: "{{ vault_oss_sk }}"
-oss_bucket: "dev-{{ app_user }}"
+oss_bucket: "{{ app_user }}-dev"
 oss_region: "ap-southeast-5"
 oss_endpoint: "oss-ap-southeast-5.aliyuncs.com"
 SOLR_HOST : "127.0.0.1"

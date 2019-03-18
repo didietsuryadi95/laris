@@ -39,16 +39,13 @@ ses_port: 587
 ses_tls: True
 ses_email: ""
 
-#gdn_fee
-gdn_fee: "10"
-
 #MAILCHIMP
 mchimp_list: "b55ee700b6"
 mchimp_key: "{{ vault_mchimp_key }}"
 
 #ipay
 ipay_url: "https://payment.ipay88.co.id/epayment/entry.asp"
-ipay_code: "ID00757_S0001"
+ipay_code: "ID00757_S0004"
 ipay_key: "{{ vault_ipay_key }}"
 
 #OSS
