@@ -71,7 +71,7 @@ server {
     location /thumb/uploads {
     expires 30d;
     add_header Cache-Control "public, max-age=31536000";
-    proxy_pass https://dev-{{ oss_bucket }}.{{ oss_endpoint }}/uploads;
+    proxy_pass https://{{ oss_bucket }}.{{ oss_endpoint }}/uploads;
     }
  
     {% for loc in http_static_locations %}
