@@ -108,7 +108,7 @@ pipeline
                 def cmd = """
                 PIPE=\$(mktemp -u);
                 mkfifo \$PIPE;
-                (echo '${jimshoney}' >\$PIPE &);
+                (echo '${testimo}' >\$PIPE &);
                 ansible-playbook ./deploy/omnibus.yml -i ./deploy/environments/production --extra-vars 'repo_ref=${branch_name}' --vault-password-file=\$PIPE || (
                 RC=\$?;
                 rm \$PIPE;
