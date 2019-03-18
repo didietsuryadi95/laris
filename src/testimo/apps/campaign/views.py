@@ -2,12 +2,12 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
-from django.template.loader import render_to_string
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 
 from apps.partner_api.tasks import send_email
 from apps.partner_api.client import get_mailchimp_client
+from apps.partner_api.utils import render_to_string_with_context
 from .forms import ContactusForm
 
 
@@ -51,7 +51,7 @@ def contact_us_email_view(request):
             in_regard = form.cleaned_data['in_regard']
             subject = in_regard + ' - ' + name + ' (' + from_email + ')'
             content = form.cleaned_data['message']
-            message = render_to_string('contactus/emails/commtype_contactus_body.html', {
+            message = render_to_string_with_context('contactus/emails/commtype_contactus_body.html', **{
                 'name': name,
                 'email': from_email,
                 'in_regard': in_regard,

@@ -1,21 +1,25 @@
+import logging
+
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.template.loader import render_to_string
+from apps.templatetags.utils_tags import get_scheme, get_full_current_site
+from django.contrib.sites.shortcuts import get_current_site
+
+logger = logging.getLogger('testimo')
 
 
 def render_to_string_with_context(template_path, **kwargs):
     domain = kwargs.get('domain')
     scheme = kwargs.get('scheme')
     if not domain:
-        domain = Site.objects.last().domain
+        domain = get_current_site(None).domain
     if not scheme:
-        debug = getattr(settings, 'DEBUG')
-        scheme = 'https://' if not debug else 'http://'
+        scheme = get_scheme()
 
     kwargs.update({
         'domain': domain,
         'scheme': scheme,
-        'homepage_url': scheme+domain,
+        'homepage_url': get_full_current_site(),
         'facebook': getattr(settings, 'SOCIAL_FACEBOOK', None),
         'instagram': getattr(settings, 'SOCIAL_INSTAGRAM', None),
         'twitter': getattr(settings, 'SOCIAL_TWITTER', None),
@@ -23,3 +27,6 @@ def render_to_string_with_context(template_path, **kwargs):
     })
     message = render_to_string(template_path, kwargs)
     return message
+
+
+

@@ -9,7 +9,7 @@
     font-size: 14px;
     display: inline-block;
     margin-bottom: 0;
-    font-family: @font-primary;
+    font-family: @font-family-base;
     font-weight: @btn-font-weight;
     text-align: center;
     vertical-align: middle;
@@ -91,7 +91,7 @@
 
 .btn-primary {
     // color || background || border color
-    .button-variant(@black; @primary; @primary);
+    .button-variant(@white; @primary; @primary);
 }
 
 
@@ -174,14 +174,14 @@
 
     &.active {
         cursor: pointer;
-        .button-variant(@black; @primary; @primary);
+        .button-variant(@black; @white; @primary);
 
         &.active {
 
             cursor: pointer;
-            color: #3c3c46;
-            background-color: #fddfe1;
-            border-color: #fddfe1;
+            color: @primary;
+            background-color: @light-grey;
+            border-color: @primary;
         }
     }
 
@@ -225,8 +225,8 @@ input[type="button"] {
         outline: none;
     }
     &:hover {
-        color: @color;
-        background-color: darken(@background, 10%);
+        color: @primary;
+        background-color: @white;
         border-color: darken(@border, 10%);
     }
     &:active,

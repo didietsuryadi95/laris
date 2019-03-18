@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load staticfiles %}
-{% load thumbnail %}
 
 <div class="gdn-slider">
     <div class="swiper-container slider-home-banner">
@@ -11,14 +10,10 @@
                         <figure>
                             <picture>
                                 <a href="{{ banner.url }}">
-                                    {% thumbnail banner.image_desktop "1438x576" upscale=False as thumb %}
-                                        <img class="gdn-home-banner-desktop" src="{{ thumb.url }}"
-                                             alt="{{ banner.description }}" style="width:100%;">
-                                    {% endthumbnail %}
-                                    {% thumbnail banner.image_mobile "360x594" upscale=False as thumb %}
-                                        <img class="gdn-home-banner-mobile" src="{{ thumb.url }}"
-                                             alt="{{ banner.description }}" style="width:100%;">
-                                    {% endthumbnail %}
+                                    <img class="gdn-home-banner-desktop" src="{{ banner.get_desktop_image }}"
+                                         alt="{{ banner.description }}" style="width:100%;">
+                                    <img class="gdn-home-banner-mobile" src="{{ banner.get_mobile_image }}"
+                                         alt="{{ banner.description }}" style="width:100%;">
                                 </a>
                             </picture>
                         </figure>

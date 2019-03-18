@@ -41,8 +41,12 @@
                         <ul class="ul-list-none gdn-footer-middle-social">
                             {% for s in SOCIAL_MEDIA %}
                                 {% if s.link %}
-                                    <li><a href="{{ s.link }}" target="_blank" class="text-black d-block"><i
-                                    class="{{ s.icon }}"></i></a></li>
+                                    <li>
+                                        <a href="{{ s.link }}" target="_blank" class="text-gray d-block">
+                                            <i class="{{ s.icon }}"></i>
+                                            <span class="text-body-1">{{ s.name }}</span>
+                                        </a>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -141,7 +145,7 @@
         </div>
         <div class="gdn-footer-bottom bg-primary d-block">
             <div class="d-block text-center">
-                <span class="text-caption text-white">© 2019 - PT. Gramedia Digital Nusantara</span>
+                <span class="text-caption text-white">© {% now "Y" %} - PT. Gramedia Digital Nusantara</span>
             </div>
         </div>
     {% endblock %}

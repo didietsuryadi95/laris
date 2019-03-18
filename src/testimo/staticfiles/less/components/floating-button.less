@@ -81,6 +81,23 @@
     display: none;
 }
 
+ul.gdn-list-bullet {
+    padding-left: 5px;
+    display: table;
+
+    li:before
+    {
+        content: "\002022";
+        padding-left: 5px;
+        padding-right: 5px;
+        display: table-cell; /* aha! */
+    }
+    > li {
+        margin: 0 0 3px 0;
+        width: auto;
+    }
+}
+
 @media screen and (max-width: @m-break) {
     .sort-filter-mobile {
         display: block;

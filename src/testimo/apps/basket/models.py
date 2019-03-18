@@ -8,14 +8,20 @@ class Basket(AbstractBasket):
         """
         Return total line price excluding tax
         """
-        return self._get_total('line_price_excl_tax_incl_discounts_without_voucher')
+        if len(self.offer_discounts) == 0:
+            return self._get_total('line_price_excl_tax')
+        else:
+            return self._get_total('line_price_excl_tax_incl_discounts_without_voucher')
 
     @property
     def total_incl_tax_without_voucher(self):
         """
         Return total price inclusive of tax and discounts
         """
-        return self._get_total('line_price_incl_tax_incl_discounts_without_voucher')
+        if len(self.offer_discounts) == 0:
+            return self._get_total('line_price_incl_tax')
+        else:
+            return self._get_total('line_price_incl_tax_incl_discounts_without_voucher')
 
 
 class Line(AbstractLine):

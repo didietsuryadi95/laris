@@ -1,5 +1,4 @@
 {% load reviews_tags %}
-{% load thumbnail %}
 {% load i18n %}
 {% load display_tags %}
 {% load utils_tags %}
@@ -15,17 +14,15 @@
         <figure>
             {% block product_image %}
                 {% with image=product.primary_image %}
-                    {% thumbnail image.original "x310" upscale=False as thumb %}
-                        <a href="{{ product.get_absolute_url }}">
-                            <picture class="gdn-product-thumb">
-                                {% if product.date_created|is_new %}
-                                    <span class="right bg-primary text-notice">NEW</span>
-                                {% endif %}
-                                <img src="{{ thumb.url }}"
-                                     alt="{{ product.get_title }}">
-                            </picture>
-                        </a>
-                    {% endthumbnail %}
+                    <a href="{{ product.get_absolute_url }}">
+                        <picture class="gdn-product-thumb">
+                            {% if product.date_created|is_new %}
+                                <span class="right bg-primary text-notice">NEW</span>
+                            {% endif %}
+                            <img src="{{ image.get_image }}"
+                                 alt="{{ product.get_title }}">
+                        </picture>
+                    </a>
                 {% endwith %}
             {% endblock %}
             <figcaption>

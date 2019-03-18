@@ -1,6 +1,5 @@
 {% extends 'dashboard/layout.html' %}
 {% load i18n %}
-{% load thumbnail %}
 
 {% block title %}
     {% trans "Banner Mini" %} '{{ txn.title }}' | {{ block.super }}
@@ -21,13 +20,11 @@
             <tr><th>{% trans "Title" %}</th><td>{{ txn.title }}</td></tr>
             <tr><th>{% trans "Image" %}</th>
                 <td>
-                {% if txn.image.url %}
+                {% if txn.image.get_image %}
                     {% with image=txn.image %}
-                        {% thumbnail image "300x300" upscale=False as thumb %}
                         <a href="{{ image.url }}" target="_blank">
-                            <img src="{{ thumb.url }}" alt="{{ txn.image.name }}" >
+                            <img src="{{ image.get_image }}" alt="{{ txn.image.name }}" height="300" width="300">
                         </a>
-                        {% endthumbnail %}
                     {% endwith %}
                 {% else %}
                     —

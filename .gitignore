@@ -170,16 +170,17 @@ src/testimo/static/*
 src/testimo/static/
 src/testimo/static/.gitkeep
 
+
+!src/testimo/uploads/.gitkeep
+!src/testimo/uploads/image_not_found.png
 src/testimo/uploads/*
 src/testimo/uploads/
+
 logs/*
 !logs/.gitkeep
 !il8n/.gitkeep
 
 .vscode/
-
-!src/testimo/uploads/.gitkeep
-!src/testimo/uploads/image_not_founds.jpg
 
 node_modules
 

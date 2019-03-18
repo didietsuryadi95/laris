@@ -21,6 +21,12 @@ class OrderCreator(OriginalOrderCreator):
         if not stockrecord:
             raise exceptions.UnableToPlaceOrder(
                 "Basket line #%d has no stockrecord" % basket_line.id)
+        if len(basket_line.basket.offer_discounts) == 0:
+            unit_price_excl_tax_incl_discount = basket_line.unit_price_excl_tax
+            unit_price_incl_tax_incl_discount = basket_line.unit_price_incl_tax
+        else:
+            unit_price_excl_tax_incl_discount = basket_line.unit_price_excl_tax_incl_discount
+            unit_price_incl_tax_incl_discount = basket_line.unit_price_incl_tax_incl_discount
         partner = stockrecord.partner
         line_data = {
             'order': order,
@@ -39,8 +45,8 @@ class OrderCreator(OriginalOrderCreator):
             basket_line.line_price_excl_tax_incl_discounts,
             'line_price_incl_tax':
             basket_line.line_price_incl_tax_incl_discounts,
-            'line_price_after_discounts_excl_tax': basket_line.unit_price_excl_tax_incl_discount,
-            'line_price_after_discounts_incl_tax': basket_line.unit_price_incl_tax_incl_discount,
+            'line_price_after_discounts_excl_tax': unit_price_excl_tax_incl_discount,
+            'line_price_after_discounts_incl_tax': unit_price_incl_tax_incl_discount,
             'line_price_before_discounts_excl_tax':
             basket_line.line_price_excl_tax,
             'line_price_before_discounts_incl_tax':
@@ -55,10 +61,8 @@ class OrderCreator(OriginalOrderCreator):
             basket_line.purchase_info.availability.dispatch_date
         }
         extra_line_fields = extra_line_fields or {}
-        if hasattr(settings, 'OSCAR_INITIAL_LINE_STATUS'):
-            if not (extra_line_fields and 'status' in extra_line_fields):
-                extra_line_fields['status'] = getattr(
-                    settings, 'OSCAR_INITIAL_LINE_STATUS')
+        if hasattr(settings, 'OSCAR_INITIAL_LINE_STATUS') and not (extra_line_fields and 'status' in extra_line_fields):
+            extra_line_fields['status'] = getattr(settings, 'OSCAR_INITIAL_LINE_STATUS')
         if extra_line_fields:
             line_data.update(extra_line_fields)
 

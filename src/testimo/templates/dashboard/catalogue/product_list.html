@@ -1,6 +1,5 @@
 {% extends 'dashboard/layout.html' %}
 {% load i18n %}
-{% load thumbnail %}
 {% load staticfiles %}
 {% load sorting_tags %}
 {% load render_table from django_tables2 %}
@@ -34,7 +33,7 @@
         <div class="well">
             <form action="{% url 'dashboard:catalogue-product-create' %}" method="get" class="form-inline">
                 {% include "dashboard/partials/form_fields_inline.html" with form=productclass_form %}
-                <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Submitting...' %}"><i class="icon-plus"></i> {% trans "New Product" %}</button>
+                <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Memproses...' %}"><i class="icon-plus"></i> {% trans "New Product" %}</button>
             </form>
         </div>
     {% endblock %}

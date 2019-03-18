@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.conf import settings
 from django import template
 from oscar.core.loading import get_model
-from haystack.query import SearchQuerySet
+from apps.templatetags.utils_tags import get_full_current_site
 
 Banner = get_model('campaign', 'Banner')
 BannerMini = get_model('campaign', 'BannerMini')
@@ -36,6 +36,8 @@ def dummy_banner_mini(queryset):
                 result.append(d)
         if dummy and len(result) == i:
             new_dummy = dummy
+            if not new_dummy['url']:
+                new_dummy['url'] = get_full_current_site()
             new_dummy['sort_priority'] = i
             default_mini_banner = BannerMini(**new_dummy)
             result.append(default_mini_banner)

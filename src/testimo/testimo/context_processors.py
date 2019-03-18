@@ -29,19 +29,23 @@ def global_settings(request):
         'SOCIAL_MEDIA': [
             {
                 'link': instagram,
-                'icon': 'fa fa-instagram'
+                'icon': 'fa fa-instagram',
+                'name': '@testimo_bysb'
             },
             {
                 'link': facebook,
-                'icon': 'fa fa-facebook'
+                'icon': 'fa fa-facebook',
+                'name': 'Facebook'
             },
             {
                 'link': twitter,
-                'icon': 'fa fa-twitter'
+                'icon': 'fa fa-twitter',
+                'name': 'Twitter'
             },
             {
                 'link': youtube,
-                'icon': 'fa fa-youtube-play'
+                'icon': 'fa fa-youtube-play',
+                'name': 'Youtube'
             },
         ],
         'SHOP_NAME': getattr(settings, 'OSCAR_SHOP_NAME', None),

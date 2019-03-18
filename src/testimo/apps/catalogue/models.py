@@ -4,13 +4,15 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.html import strip_tags
+from django.db.models.signals import post_save
 
 from django.utils.translation import ugettext_lazy as _
-from oscar.apps.catalogue.abstract_models import AbstractProduct
+from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductImage
 from django.core.exceptions import ValidationError
+from apps.templatetags.api_tags import get_oss_presigned_url
 
 from meta.models import ModelMeta
-
+from sorl.thumbnail import get_thumbnail
 from oscar.core.loading import get_class, get_model
 
 AllProductManager = get_class('catalogue.managers', 'AllProductManager')
@@ -48,8 +50,7 @@ class Product(ModelMeta, AbstractProduct):
         return strip_tags(self.description)
 
     def get_meta_image(self):
-        im = self.primary_image()
-        return im.original.url if im else None
+        return self.primary_image().get_image
 
     def get_date(self, param):
         if param == 'published_time' or param == 'modified_time':
@@ -130,7 +131,7 @@ class Product(ModelMeta, AbstractProduct):
             'price': int(price) if price else None,
             'category': [c.name for c in self.get_categories().all()],
             'variant': variant,
-            'image_url': uri_method(self.primary_image().original.url) if not image_missing else None,
+            'image_url': uri_method(self.primary_image().get_image) if not image_missing else None,
             'quantity': kwargs.get('quantity', None),
             'url': uri_method() if uri_method else None,
             'sku': kwargs.get('sku', None)
@@ -138,6 +139,29 @@ class Product(ModelMeta, AbstractProduct):
         if position:
             product['position'] = position
         return product
+
+    def primary_image(self):
+        """
+        Returns the primary image for a product. Usually used when one can
+        only display one product image, e.g. in a list of products.
+        """
+        images = self.get_all_images()
+        ordering = self.images.model.Meta.ordering
+        if not ordering or ordering[0] != 'display_order':
+            # Only apply order_by() if a custom model doesn't use default
+            # ordering. Applying order_by() busts the prefetch cache of
+            # the ProductManager
+            images = images.order_by('display_order')
+        try:
+            return images[0]
+        except IndexError:
+            # We return a dict with fields that mirror the key properties of
+            # the ProductImage class so this missing image can be used
+            # interchangeably in templates.  Strategy pattern ftw!
+            return ProductImage(**{
+                'original': self.get_missing_image(),
+                'caption': '',
+            })
 
     # ==========
     # Properties
@@ -152,4 +176,26 @@ class Product(ModelMeta, AbstractProduct):
         return context
 
 
+class ProductImage(AbstractProductImage):
+    original = models.ImageField(
+        _("Original"), upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255, blank=True, null=True)
+    oss_image = models.CharField(max_length=200, blank=True, null=True)
+
+    @property
+    def get_image(self):
+        if self.original:
+            try:
+                image = get_thumbnail(self.original, settings.PRODUCT_IMAGE)
+                return image.url
+            except:
+                return settings.IMAGE_NOT_FOUND_PATH
+        if self.oss_image:
+            return get_oss_presigned_url(self.oss_image, settings.PRODUCT_IMAGE_STYLE)
+        return ''
+
+
 from oscar.apps.catalogue.models import *
+
+from .signals import upload_image_product
+
+post_save.connect(upload_image_product, sender=ProductImage, dispatch_uid='ProductImage.upload_image_product')

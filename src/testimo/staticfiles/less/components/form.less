@@ -539,6 +539,7 @@ input[type="checkbox"],
 
 .gdn-form {
     .alert {
+        width: 100%;
         padding: 15px;
         margin-bottom: 20px;
 
@@ -546,6 +547,13 @@ input[type="checkbox"],
             background-color: #f2dede;
             border-color: #ebccd1;
             color: #a94442;
+        }
+    }
+
+    &.with-alert-margin {
+        .alert {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
         }
     }
 }
@@ -571,6 +579,11 @@ input::-webkit-inner-spin-button {
     position: relative;
 }
 
+.gdn-currency-input{
+    position: relative;
+    display: flex;
+}
+
 .gdn-password-form-input > i, .gdn-date-input > i {
     position: absolute;
     top: 5px;
@@ -579,6 +592,21 @@ input::-webkit-inner-spin-button {
     padding: 10px;
     color: #787878;
     cursor: pointer;
+}
+
+.gdn-currency-input > span {
+    top: 5px;
+    left: 0;
+    font-size: 19px;
+    padding: 10px;
+    color: #787878;
+    cursor: pointer;
+    border: 0.5px solid #787878;
+    border-right: 0px;
+}
+
+.sliderValue {
+    border-left: 0px;
 }
 
 

@@ -47,7 +47,7 @@ mchimp_key: "{{ vault_mchimp_key }}"
 
 #ipay
 ipay_url: "https://sandbox.ipay88.co.id/epayment/entry.asp"
-ipay_code: "ID00879"
+ipay_code: ID00879
 ipay_key: "{{ vault_ipay_key }}"
 
 #OSS
@@ -59,7 +59,6 @@ oss_endpoint: "oss-ap-southeast-5.aliyuncs.com"
 SOLR_HOST : "127.0.0.1"
 DEBUG: "False"
 debug_email: ""
-max_con: 1000
 
 app_vars:
     - { name: DB_URI_PASS, value: "postgresql://{{ app_name }}:{{ tes_db_pass }}@{{ tes_db_host }}:5432/{{ app_name }}"}
@@ -97,5 +96,6 @@ app_vars:
     - { name: MCHIMP_API_PASS, value: "{{ mchimp_key }}"}
     - { name: MCHIMP_LIST_ID, value: "{{ mchimp_list }}"}
     - { name: DAYS_COMPLETE, value: "{{ days_complete }}"}
+    - { name: HOSTNAME, value: "https://{{ http_hostname }}/"}
 
 letsencrypt_email: devops@gramedia.digital

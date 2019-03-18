@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load staticfiles %}
-{% load thumbnail %}
 
 {% if data %}
     <section id="mini-banner">
@@ -11,13 +10,11 @@
         </div>
         <div class="row">
             {% for banner_data in data %}
-                <article class="col-lg-6 col-sm-6 col-xs-6">
+                <article class="col-lg-6 col-sm-6 col-xs-6 banner-mini">
                     <figure>
                         <picture>
                             <a href="{{ banner_data.url }}">
-                                {% thumbnail banner_data.image "700x524" upscale=False as thumb %}
-                                    <img src="{{ thumb.url }}" alt="{{ banner_data.title }}">
-                                {% endthumbnail %}
+                                <img src="{{ banner_data.get_image }}" alt="{{ banner_data.title }}">
                             </a>
                         </picture>
                     </figure>
