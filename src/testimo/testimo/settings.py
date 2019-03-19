@@ -433,7 +433,7 @@ OSCAR_PRODUCTS_PER_PAGE = 12
 OSCAR_REVIEWS_PER_PAGE = 5
 OSCAR_SEND_REGISTRATION_EMAIL = False
 OSCAR_FROM_EMAIL = 'no-reply@testimobysb.com'
-OSCAR_TO_EMAIL = SERVER_EMAIL = 'admin@testimobysb.com'
+OSCAR_TO_EMAIL = SERVER_EMAIL = 'sari_batubara54@yahoo.com'
 OSCAR_ALLOW_ANON_REVIEWS = False
 THUMBNAIL_SIZE = (150, 150)
 
@@ -648,7 +648,7 @@ HOSTNAME = env.string('HOSTNAME', f"https://dev-{APP_NAME}.gramedia.io/")
 SHIPPING_SENDER = {
     'name': "T'estimo By Sari Batubara",
     'mobile': '0811650444',
-    'email': 'admin@testimobysb.com',
+    'email': 'sari_batubara54@yahoo.com',
 }
 
 SHIPPING_ORIGIN = {
@@ -981,7 +981,7 @@ DEFAULT_DAYS_AUTO_COMPLETE = env.int('DAYS_COMPLETE', 14)
 GDN_FEE = env.string('GDN_FEE', '10')
 ORDER_NUMBER_PREFIX = env.string('ORDER_NUMBER_PREFIX', 'TST')
 
-SITE_DESCRIPTION = "T'estimo by Sari Batubara Official"
+SITE_DESCRIPTION = ""
 
 
 # IMAGE THUMB SIZE
