@@ -7,7 +7,7 @@ upload:
 
 
 clean:
-	pip3 uninstall --yes bisma-pos
+	pip3 uninstall --yes testimo
 	rm -fR .cache/ .eggs/  build/ dist/ *.egg-info MANIFEST static reports
 
 

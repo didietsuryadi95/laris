@@ -51,6 +51,9 @@ def global_settings(request):
         'SHOP_NAME': getattr(settings, 'OSCAR_SHOP_NAME', None),
         'SCHEME': request.is_secure() and "https://" or "http://",
         'SITE_DESC': getattr(settings, 'SITE_DESCRIPTION', None),
-        'IMG_LOGO': getattr(settings, 'DEFAULT_IMAGE_LOGO', '')
+        'IMG_LOGO': getattr(settings, 'DEFAULT_IMAGE_LOGO', ''),
+        'CONTACT_NUMBER': getattr(settings, 'PARTNER_PHONE_NUMBER', ''),
+        'CONTACT_EMAIL': getattr(settings, 'PARTNER_EMAIL', '')
+
     }
 

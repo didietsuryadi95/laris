@@ -1,7 +1,7 @@
-JIMS HONEY
-===========
+TESTIMO
+=======
 
-A [django-oscar](http://oscarcommerce.com/) app for handling JIMS HONEY devices (specifically 
+A [django-oscar](http://oscarcommerce.com/) app for handling Testimo devices (specifically 
 in a marketplace deployment). 
 
 This app must be installed with oscar in order to be used.
