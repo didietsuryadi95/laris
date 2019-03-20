@@ -44,18 +44,22 @@
                                 </span>
                                 <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_EMAIL }}</span>
                             </div>
+                            {% if CONTACT_NUMBER %}
                             <div class="col-lg-12 col-xs-12 col-xs-12 with-margin-bottom">
                                 <span class="d-block text-caption">
                                     Telepon
                                 </span>
                                 <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_NUMBER }}</span>
                             </div>
+                            {% endif %}
+                            {% if CONTACT_WHATSAPP %}
                             <div class="col-lg-12 col-xs-12 col-xs-12 with-margin-bottom">
                                 <span class="d-block text-caption">
                                     Whatsapp
                                 </span>
-                                <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_NUMBER }}</span>
+                                <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_WHATSAPP }}</span>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -644,7 +644,8 @@ OSS_ACCESS_KEY_ID = env.string('AKEY_ID', os.getenv('OSS_ACCESS_KEY_ID'))
 OSS_ACCESS_KEY_SECRET = env.string('AKEY_PASS', os.getenv('OSS_ACCESS_KEY_SECRET'))
 HOSTNAME = env.string('HOSTNAME', f"https://dev-{APP_NAME}.gramedia.io/")
 
-PARTNER_PHONE_NUMBER = '0811650444'
+PARTNER_PHONE_NUMBER = '082274115224'
+PARTNER_WHATSAPP_NUMBER = '0811650444'
 PARTNER_EMAIL = 'sari_batubara54@yahoo.com'
 SHIPPING_SENDER = {
     'name': "T'estimo By Sari Batubara",

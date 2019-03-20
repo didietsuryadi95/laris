@@ -53,6 +53,7 @@ def global_settings(request):
         'SITE_DESC': getattr(settings, 'SITE_DESCRIPTION', None),
         'IMG_LOGO': getattr(settings, 'DEFAULT_IMAGE_LOGO', ''),
         'CONTACT_NUMBER': getattr(settings, 'PARTNER_PHONE_NUMBER', ''),
+        'CONTACT_WHATSAPP': getattr(settings, 'PARTNER_WHATSAPP_NUMBER', ''),
         'CONTACT_EMAIL': getattr(settings, 'PARTNER_EMAIL', '')
 
     }
