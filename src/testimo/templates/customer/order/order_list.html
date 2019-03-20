@@ -213,11 +213,11 @@
             {% else %}
                 {% if orders or form.is_bound %}
                     {% with "Kamu pesanan yang anda cari tidak di temukan, silahkan ganti pencarian atau atur ulang pencarian anda" as wording %}
-                        {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Atur Ulang Pencarian" href="customer:order-list" id="product-list-not-found" image="order-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
+                        {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Atur Ulang Pencarian" href="customer:order-list" id="product-list-not-found" image="order-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" is_reguler=True %}
                     {% endwith %}
                 {% else %}
                     {% with "Kamu belum memiliki pesanan. Silahkan melakukan transaksi untuk produk terbaik kami" as wording %}
-                        {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Lanjut Belanja" href="promotions:home" id="product-list-not-found" image="order-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
+                        {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Lanjut Belanja" href="promotions:home" id="product-list-not-found" image="order-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" is_reguler=True %}
                     {% endwith %}
                 {% endif %}
             {% endif %}

@@ -91,7 +91,7 @@
                 <h1 class="text-title-3 text-title-4">Alamat Kirim</h1>
             </div>
             {% with "Kamu belum memiliki alamat kirim, silahkan melakukan transaksi atau tambah alamat pengiriman kamu" as wording %}
-                {% include "partials/data-not-found.html" with js_class="add-address" id="product-list-not-found" wording=wording js="form-create-address" button_name="Tambah Alamat" href="customer:address-create" id="product-list-not-found" image="address-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
+                {% include "partials/data-not-found.html" with js_class="add-address" id="product-list-not-found" wording=wording js="form-create-address" button_name="Tambah Alamat" href="customer:address-create" id="product-list-not-found" image="address-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" is_reguler=True %}
             {% endwith %}
         {% endif %}
 
