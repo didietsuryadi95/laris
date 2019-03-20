@@ -17,7 +17,7 @@
                     <a href="{{ product.get_absolute_url }}">
                         <picture class="gdn-product-thumb">
                             {% if product.date_created|is_new %}
-                                <span class="right bg-primary text-notice">NEW</span>
+                                <span class="right bg-white text-notice">NEW</span>
                             {% endif %}
                             <img src="{{ image.get_image }}"
                                  alt="{{ product.get_title }}">
