@@ -4,6 +4,7 @@ import os
 from django.core.management import BaseCommand
 from django.conf import settings
 from humanize import naturaltime
+from shutil import copyfile
 from datetime import timedelta, datetime
 from django.utils.timezone import now
 from django.utils import timezone
@@ -30,9 +31,10 @@ class Command(BaseCommand):
             'shop_tag_line': self.get_current_settings_var('OSCAR_SHOP_TAGLINE'),
             'prefix': self.get_current_settings_var('env_prefix'),
             'description': self.get_current_settings_var('SITE_DESCRIPTION'),
+            'order_number_prefix': self.get_current_settings_var('ORDER_NUMBER_PREFIX'),
             'name': self.get_current_settings_var('SHIPPING_SENDER')['name'],
-            'mobile': self.get_current_settings_var('SHIPPING_SENDER')['mobile'],
-            'email': self.get_current_settings_var('SHIPPING_SENDER')['email'],
+            'mobile': self.get_current_settings_var('PARTNER_PHONE_NUMBER'),
+            'email': self.get_current_settings_var('PARTNER_EMAIL'),
             'address': self.get_current_settings_var('SHIPPING_ORIGIN')['address'],
             'city': self.get_current_settings_var('SHIPPING_ORIGIN')['city'],
             'state': self.get_current_settings_var('SHIPPING_ORIGIN')['state'],
@@ -43,22 +45,22 @@ class Command(BaseCommand):
             'twitter': self.get_current_settings_var('SOCIAL_TWITTER'),
             'youtube': self.get_current_settings_var('SOCIAL_YOUTUBE'),
             #style
-            'primary': '#fddfe1',
-            'accent': '#fafabe',
-            'notice': '#d20a1e',
-            'success': '#32aa6e',
-            'alert': '#f4d143',
-            'error': '#fa3c50',
-            'black': '#3c3c46',
+            'primary': '#1E1E1E',
+            'accent': '#1E1E1E',
+            'notice': '#FA3C50',
+            'success': '#32AA6E',
+            'alert': '#F4D143',
+            'error': '#FA3C50',
+            'black': '#1E1E1E',
             'grey': '#828282',
-            'white': '#ffffff',
-            'light-grey': '#dcdcdc',
-            'primary-dark': '#faa0aa',
+            'white': '#FFFFFF',
+            'light-grey': '#DCDCDC',
+            'primary-dark': '#1E1E1E',
             #font
-            'primary_font_name': 'Merriweather',
-            'primary_font_var': 'merriweather',
-            'secondary_font_name': 'Rubik',
-            'secondary_font_var': 'rubik',
+            'primary_font_name': 'Thasadith',
+            'primary_font_var': 'thasadith',
+            'secondary_font_name': 'Sarabun',
+            'secondary_font_var': 'sarabun',
             'font_light_size': 300,
             'font_reguler_size': 400,
             'font_medium_size': 500,
@@ -79,15 +81,21 @@ class Command(BaseCommand):
             'settings': [self.app_name + i for i in ['/settings.py', '/wsgi.py']]
             + ['manage.py', 'run_celery'] + ['../../' + i for i in ['docker-compose.yml', 'setup.py', 'setup.cfg',
                                                                     'Vagrantfile']],
-            'folder': ['./', '../', '../../solr-core/'],
-            'style': ['staticfiles/less/components/' + i for i in ['colors.less', 'font-face.less']],
-            'html': templates_dir
+            'folder': ['./', '../', '../../solr-core/', '../../../'],
+            'style': ['staticfiles/less/components/' + i for i in ['colors.less', 'font-face.less', 'typography.less',
+                                                                   'variables.less']],
+            'html': templates_dir,
+            'image': 'staticfiles/img/',
+            'config': ['./apps/management/commands/boilerplate_project.py']
         }
         return reduce(lambda x, y: x+y, [files[k] for k in kind])
 
-    def replace_in_files(self, old_value, new_value, files):
+    @staticmethod
+    def replace_in_files(old_value, new_value, files):
         if old_value is None:
             return False
+        if old_value == new_value:
+            return True
         for f in files:
             with open(f, 'r') as file:
                 filedata = file.read()
@@ -96,12 +104,22 @@ class Command(BaseCommand):
                 file.write(filedata)
         return True
 
-    def change_folder_name(self, old_name, new_name, folders):
+    @staticmethod
+    def change_folder_name(old_name, new_name, folders):
+        if old_name == new_name:
+            return True
         for f in folders:
             os.rename(f + old_name, f + new_name)
         return True
 
-    def copy_file_from(self, new_directory, target_directory):
+    @staticmethod
+    def copy_file_from(local_dir, current_dir):
+        for root, dirs, files in os.walk(local_dir):
+            for file in files:
+                for root_target, dirs_target, files_target in os.walk(current_dir):
+                    for target in files_target:
+                        if file.endswith(target):
+                            copyfile(os.path.join(root, file), os.path.join(root_target, target))
         return True
 
     def processing(self, action, new_value, variable, kind_file):
@@ -111,11 +129,11 @@ class Command(BaseCommand):
         if 'change_folder_name' in action:
             self.change_folder_name(self.get_old_value(variable), new_value, self.get_target(['folder']))
         if 'copy_files' in action:
-            self.copy_file_from(new_value, variable)
+            self.copy_file_from(new_value, self.get_target(['image']))
 
     def handle(self, *args, **options):
         start = timezone.now()
-        with open(options.get('config'), encoding='utf-8') as config:
+        with open('../../fixtures/config.json', encoding='utf-8') as config:
             variables = json.loads(config.read())
 
         total_variable = len(variables)

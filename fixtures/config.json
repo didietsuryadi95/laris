@@ -1,6 +1,6 @@
 
 [
-  {
+    {
     "action": ["replace_files"],
     "value": "testimobysb.com",
     "variable": "domain_name",
@@ -40,6 +40,12 @@
     "action": ["replace_files"],
     "value": "0811650444",
     "variable": "mobile",
+    "target": ["settings"]
+  },
+  {
+    "action": ["replace_files"],
+    "value": "TST",
+    "variable": "order_number_prefix",
     "target": ["settings"]
   },
   {
@@ -106,96 +112,103 @@
     "action": ["replace_files"],
     "value": "#1E1E1E",
     "variable": "primary",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#1E1E1E",
     "variable": "accent",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#FA3C50",
     "variable": "notice",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#32AA6E",
     "variable": "success",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#F4D143",
     "variable": "alert",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#FA3C50",
     "variable": "error",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#1E1E1E",
     "variable": "black",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#828282",
     "variable": "grey",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#FFFFFF",
     "variable": "white",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#DCDCDC",
     "variable": "light-grey",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "#1E1E1E",
     "variable": "primary-dark",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "Thasadith",
     "variable": "primary_font_name",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "thasadith",
     "variable": "primary_font_var",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "Sarabun",
     "variable": "secondary_font_name",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files"],
     "value": "sarabun",
     "variable": "secondary_font_var",
-    "target": ["style"]
+    "target": ["style", "config"]
   },
   {
     "action": ["replace_files", "change_folder_name"],
     "value": "testimo",
     "variable": "app_name",
     "target": ["settings", "folder"]
+  },
+  {
+    "action": ["copy_files"],
+    "value": "/home/didit/Desktop/img",
+    "variable": "image_folder",
+    "target": ["image"]
   }
+
 ]

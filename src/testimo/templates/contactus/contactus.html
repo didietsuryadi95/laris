@@ -42,20 +42,24 @@
                                 <span class="d-block text-caption">
                                     Email
                                 </span>
-                                <span class="d-block text-body-1 ellipsis-desktop">icarrytestimo@gmail.com</span>
+                                <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_EMAIL }}</span>
                             </div>
+                            {% if CONTACT_NUMBER %}
                             <div class="col-lg-12 col-xs-12 col-xs-12 with-margin-bottom">
                                 <span class="d-block text-caption">
                                     Telepon
                                 </span>
-                                <span class="d-block text-body-1 ellipsis-desktop">0878 788 20660</span>
+                                <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_NUMBER }}</span>
                             </div>
+                            {% endif %}
+                            {% if CONTACT_WHATSAPP %}
                             <div class="col-lg-12 col-xs-12 col-xs-12 with-margin-bottom">
                                 <span class="d-block text-caption">
                                     Whatsapp
                                 </span>
-                                <span class="d-block text-body-1 ellipsis-desktop">0878 788 20660</span>
+                                <span class="d-block text-body-1 ellipsis-desktop">{{ CONTACT_WHATSAPP }}</span>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

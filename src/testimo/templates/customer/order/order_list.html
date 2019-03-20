@@ -217,7 +217,7 @@
                     {% endwith %}
                 {% else %}
                     {% with "Kamu belum memiliki pesanan. Silahkan melakukan transaksi untuk produk terbaik kami" as wording %}
-                        {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Lanjut Belanja" id="product-list-not-found" image="order-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
+                        {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Lanjut Belanja" href="promotions:home" id="product-list-not-found" image="order-list-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
                     {% endwith %}
                 {% endif %}
             {% endif %}

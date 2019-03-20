@@ -171,7 +171,7 @@
         </div>
     {% else %}
         {% with "Mohon maaf, produk yang kamu cari tidak ditemukan" as wording %}
-            {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Cari yang lain" url="/" id="product-list-not-found" image="product-list-not-found.png" grid="col-lg-6" %}
+            {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Cari yang lain" href="promotions:home" id="product-list-not-found" image="product-list-not-found.png" grid="col-lg-6" %}
         {% endwith %}
     {% endif %}
 

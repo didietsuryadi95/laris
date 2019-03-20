@@ -200,7 +200,7 @@
     <div class="container">
         {% block emptybasket %}
             {% with "Keranjang Belanja Anda Kosong. Mulai Mencari Barang yang kamu inginkan dan jadilah diri sendiri" as wording %}
-                {% include "partials/data-not-found.html" with url="/" id="product-cart" wording=wording button_name="Cari Produk" id="product-list-not-found" imageclass="col-lg-5 col-sm-5 col-xs-5" image="shopping-cart-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
+                {% include "partials/data-not-found.html" with href="promotions:home" id="product-cart" wording=wording button_name="Cari Produk" id="product-list-not-found" imageclass="col-lg-5 col-sm-5 col-xs-5" image="shopping-cart-not-found.png" grid="col-lg-4 col-sm-8 col-xs-12" %}
             {% endwith %}
         {% endblock %}
     </div>

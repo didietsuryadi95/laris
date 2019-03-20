@@ -28,7 +28,7 @@
 {% block content %}
     {% if not offer.is_available %}
         {% with "Maaf, Penawaran sudah tidak tersedia... Yuk temukan lagi produk insiprasi kamu" as wording %}
-            {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Temukan Lagi" id="product-list-not-found" image="product-not-found.png" grid="col-lg-7" %}
+            {% include "partials/data-not-found.html" with id="product-list-not-found" wording=wording button_name="Temukan Lagi" id="product-list-not-found" image="product-not-found.png" grid="col-lg-7" href="promotions:home"%}
         {% endwith %}
     {% endif %}
 
@@ -45,7 +45,7 @@
         </section>
     {% else %}
         {% with "Maaf, Produk Tidak Tersedia... Yuk temukan lagi produk insiprasi kamu" as wording %}
-            {% include "partials/data-not-found.html" with id="product-list-not-found" url="/"  wording=wording button_name="Temukan Lagi" id="product-list-not-found" image="product-not-found.png" grid="col-lg-7" %}
+            {% include "partials/data-not-found.html" with id="product-list-not-found" href="promotions:home"  wording=wording button_name="Temukan Lagi" id="product-list-not-found" image="product-not-found.png" grid="col-lg-7" %}
         {% endwith %}
     {% endif %}
 
