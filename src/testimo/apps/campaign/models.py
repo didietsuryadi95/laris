@@ -35,9 +35,9 @@ class BannerEntryQuery(models.QuerySet):
 
 
 class Banner(TimesStampedModel):
-    image_desktop = models.ImageField(_('Image Desktop'), upload_to='campaign/banner/')
+    image_desktop = models.ImageField(_('Image Desktop'), blank=True, null=True, upload_to='campaign/banner/')
     oss_image_desktop = models.CharField(max_length=200, blank=True, null=True)
-    image_mobile = models.ImageField(_('Image Mobile'), upload_to='campaign/banner/')
+    image_mobile = models.ImageField(_('Image Mobile'), blank=True, null=True, upload_to='campaign/banner/')
     oss_image_mobile = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(_('Title'), max_length=200)
     description = models.TextField(_('Description'), max_length=255)
@@ -145,7 +145,7 @@ class BannerMiniEntryQuery(models.QuerySet):
 
 
 class BannerMini(TimesStampedModel):
-    image = models.ImageField(_('Image'), upload_to='campaign/banner_mini/')
+    image = models.ImageField(_('Image'), blank=True, null=True, upload_to='campaign/banner_mini/')
     oss_image = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(_('Title'), max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
@@ -251,7 +251,7 @@ class EndorsementQueryManager(models.QuerySet):
 
 
 class Endorsement(TimesStampedModel):
-    image = models.ImageField(_('Image'), upload_to='campaign/endorsement/')
+    image = models.ImageField(_('Image'), blank=True, null=True, upload_to='campaign/endorsement/')
     oss_image = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(_('Endorsement Name'), max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
