@@ -9,7 +9,7 @@
                         <div class="
                             {% if imageclass %}{{ imageclass }}{% else %}col-lg-12 col-sm-12 col-xs-12{% endif %}">
                             <picture class="text-center">
-                                <img style="display: inline;width: 160px;" src="{% static "img/image-not-found/" %}{{ image }}" alt="">
+                                <img {% if is_reguler %}style="display: inline;width: 160px;"{% endif %} src="{% static "img/image-not-found/" %}{{ image }}" alt="">
                             </picture>
                         </div>
                     </div>

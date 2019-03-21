@@ -29,7 +29,7 @@
                 {% block product_title %}
                     <a class="word-wrap text-body-1 text-body-2 text-black" href="{{ product.get_absolute_url }}"
                        title="{{ product.get_title }}">
-                        {{ product.get_title|truncatewords:4 }}</a>
+                        {{ product.get_title|truncatechars:22 }}</a>
                 {% endblock %}
                 {% block product_price %}
                     <div class="gdn-product-price">
