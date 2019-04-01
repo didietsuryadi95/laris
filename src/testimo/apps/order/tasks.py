@@ -29,7 +29,7 @@ def auto_update_order_status():
     ]
 
     for status in statuses:
-        change_date = timezone.localtime(timezone.now()).date() - timedelta(days=status['day'])
+        change_date = timezone.localtime(timezone.now()) - timedelta(days=status['day'])
         query = OrderNote.objects.filter(new_status=status['old_status'],
                                          order__status=status['old_status'],
                                          date_created__lte=change_date)
