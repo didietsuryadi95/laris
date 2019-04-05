@@ -58,8 +58,8 @@
                 {% for offer in offers %}
                     <tr>
                         <td><a href="{% url 'dashboard:offer-detail' pk=offer.pk %}">{{ offer.name }}</a></td>
-                        <td>{{ offer.start_date|default:"-" }}</td>
-                        <td>{{ offer.end_date|default:"-" }}</td>
+                        <td>{{ offer.start_datetime|date:"d M Y H:i"|default:"-" }}</td>
+                        <td>{{ offer.end_datetime|date:"d M Y H:i"|default:"-" }}</td>
                         <td>{{ offer.priority }}</td>
                         <td>{{ offer.benefit.description|safe }}</td>
                         <td>{{ offer.condition.description|safe }}</td>

@@ -375,7 +375,7 @@ OSCAR_USE_LESS = DEBUG
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
 
-OSCAR_SHOP_NAME = "T'estimo by Sari Batubara"
+OSCAR_SHOP_NAME = "Testimo by Sari Batubara"
 OSCAR_SHOP_TAGLINE = "TestimoBySB.com"
 OSCAR_DEFAULT_CURRENCY = 'IDR'
 
@@ -552,11 +552,6 @@ OSCAR_DASHBOARD_NAVIGATION = [
                 'label': _('Vouchers'),
                 'url_name': 'dashboard:voucher-list',
             },
-            {
-                'label': _('Voucher Sets'),
-                'url_name': 'dashboard:voucher-set-list',
-            },
-
         ],
     },
     {
@@ -564,20 +559,8 @@ OSCAR_DASHBOARD_NAVIGATION = [
         'icon': 'icon-folder-close',
         'children': [
             {
-                'label': _('Content blocks'),
-                'url_name': 'dashboard:promotion-list',
-            },
-            {
-                'label': _('Content blocks by page'),
-                'url_name': 'dashboard:promotion-list-by-page',
-            },
-            {
                 'label': _('Pages'),
                 'url_name': 'dashboard:page-list',
-            },
-            {
-                'label': _('Email templates'),
-                'url_name': 'dashboard:comms-list',
             },
             {
                 'label': _('Reviews'),
@@ -648,7 +631,7 @@ PARTNER_PHONE_NUMBER = '082274115224'
 PARTNER_WHATSAPP_NUMBER = '0811650444'
 PARTNER_EMAIL = 'sari_batubara54@yahoo.com'
 SHIPPING_SENDER = {
-    'name': "T'estimo By Sari Batubara",
+    'name': "Testimo By Sari Batubara",
     'mobile': PARTNER_PHONE_NUMBER,
     'email': PARTNER_EMAIL,
 }
