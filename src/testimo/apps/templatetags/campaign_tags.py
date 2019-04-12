@@ -7,6 +7,7 @@ from apps.templatetags.utils_tags import get_full_current_site
 Banner = get_model('campaign', 'Banner')
 BannerMini = get_model('campaign', 'BannerMini')
 Endorsement = get_model('campaign', 'Endorsement')
+SeoFooter = get_model('campaign', 'SeoFooter')
 
 Product = get_model('catalogue', 'Product')
 
@@ -61,3 +62,8 @@ def get_endorsements():
 @register.simple_tag()
 def get_highlight_products():
     return Product.objects.filter(highlight=True, structure__in=['child', 'standalone'])
+
+
+@register.simple_tag()
+def get_seo_footer():
+    return SeoFooter.objects.all().order_by('-date_created')

@@ -4,14 +4,15 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from .forms import BannerForm, BannerSearchForm, BannerMiniForm, BannerMiniSearchForm, \
-    EndorsementForm, EndorsementSearchForm
-from .tables import BannerTable, BannerMiniTable, EndorsementTable
+    EndorsementForm, EndorsementSearchForm, SeoFooterForm, SeoFooterSearchForm
+from .tables import BannerTable, BannerMiniTable, EndorsementTable, SeoFooterTable
 from django_tables2 import SingleTableView
 from oscar.core.loading import get_model
 
 Banner = get_model('campaign', 'Banner')
 BannerMini = get_model('campaign', 'BannerMini')
 Endorsement = get_model('campaign', 'Endorsement')
+SeoFooter = get_model('campaign', 'SeoFooter')
 
 # ===============================================
 #
@@ -334,3 +335,110 @@ class EndorsementDetailView(DetailView):
     model = Endorsement
     context_object_name = 'txn'
     template_name = 'dashboard/endorsements/endorsement_detail.html'
+
+
+# ===============================================
+#
+#                    SEOFOOTER
+#
+# ===============================================
+
+# ============
+# CREATE VIEWS
+# ============
+class SeoFooterCreateView(CreateView):
+    model = SeoFooter
+    form_class = SeoFooterForm
+    template_name = 'dashboard/seo_footer/seo_footer_form.html'
+    success_url = reverse_lazy('dashboard:seo-footer-list')
+
+    def get_success_url(self):
+        messages.info(self.request, _("SeoFooter created successfully"))
+        return super(SeoFooterCreateView, self).get_success_url()
+
+    def get_context_data(self, **kwargs):
+        ctx = super(SeoFooterCreateView, self).get_context_data(**kwargs)
+        ctx['title'] = _("Create SeoFooter")
+        return ctx
+
+
+# ============
+# UPDATE VIEWS
+# ============
+class SeoFooterUpdateView(UpdateView):
+    model = SeoFooter
+    form_class = SeoFooterForm
+    template_name = 'dashboard/seo_footer/seo_footer_form.html'
+    success_url = reverse_lazy('dashboard:seo-footer-list')
+
+    def get_success_url(self):
+        messages.info(self.request, _("SeoFooter updated successfully"))
+        return super(SeoFooterUpdateView, self).get_success_url()
+
+    def get_context_data(self, **kwargs):
+        ctx = super(SeoFooterUpdateView, self).get_context_data(**kwargs)
+        ctx['seo_footer'] = self.object
+        ctx['name'] = self.object.title
+        return ctx
+
+
+# ============
+# DELETE VIEWS
+# ============
+class SeoFooterDeleteView(DeleteView):
+    model = SeoFooter
+    context_object_name = 'seo_footer'
+    template_name = 'dashboard/seo_footer/seo_footer_delete.html'
+    success_url = reverse_lazy('dashboard:seo-footer-list')
+
+    def get_success_url(self):
+        messages.info(self.request, _("SeoFooter deleted"))
+        return reverse('dashboard:seo-footer-list')
+
+
+# ============
+# LIST VIEWS
+# ============
+class SeoFooterListView(SingleTableView):
+    model = SeoFooter
+    table_class = SeoFooterTable
+    form_class = SeoFooterSearchForm
+    context_table_name = 'seo_footer'
+    template_name = 'dashboard/seo_footer/seo_footer_list.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(SeoFooterListView, self).get_context_data(**kwargs)
+        ctx['form'] = self.form
+        return ctx
+
+    def get_description(self, form):
+        if form.is_valid() and any(form.cleaned_data.values()):
+            return _('SeoFooters search results')
+        return _('SeoFooters')
+
+    def get_table(self, **kwargs):
+        table = super(SeoFooterListView, self).get_table(**kwargs)
+        table.caption = self.get_description(self.form)
+        return table
+
+    def get_table_pagination(self, table):
+        return dict(per_page=20)
+
+    def get_queryset(self):
+        queryset = self.model.objects.all()
+        self.form = self.form_class(self.request.GET)
+        if not self.form.is_valid():
+            return queryset
+        data = self.form.cleaned_data
+        if data['name']:
+            queryset = queryset.filter(title__icontains=data['name'])
+        return queryset
+
+
+# ============
+# DETAIL VIEWS
+# ============
+class SeoFooterDetailView(DetailView):
+    model = SeoFooter
+    context_object_name = 'txn'
+    template_name = 'dashboard/seo_footer/seo_footer_detail.html'

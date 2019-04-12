@@ -26,6 +26,12 @@ class CampaignDashboardConfig(DashboardApplication):
     endorsement_delete_view = get_class('dashboard.campaign.views', 'EndorsementDeleteView')
     endorsement_detail_view = get_class('dashboard.campaign.views', 'EndorsementDetailView')
 
+    seo_footer_list_view = get_class('dashboard.campaign.views', 'SeoFooterListView')
+    seo_footer_create_view = get_class('dashboard.campaign.views', 'SeoFooterCreateView')
+    seo_footer_update_view = get_class('dashboard.campaign.views', 'SeoFooterUpdateView')
+    seo_footer_delete_view = get_class('dashboard.campaign.views', 'SeoFooterDeleteView')
+    seo_footer_detail_view = get_class('dashboard.campaign.views', 'SeoFooterDetailView')
+
     def get_urls(self):
         urls = [
             url(r'^banner/$', self.banner_list_view.as_view(), name='banner-list'),
@@ -36,15 +42,27 @@ class CampaignDashboardConfig(DashboardApplication):
 
             url(r'^banner-mini/$', self.banner_mini_list_view.as_view(), name='banner-mini-list'),
             url(r'^create-banner-mini/$', self.banner_mini_create_view.as_view(), name='banner-mini-create'),
-            url(r'^delete-banner-mini/(?P<pk>\d+)/$', self.banner_mini_delete_view.as_view(), name='banner-mini-delete'),
-            url(r'^update-banner-mini/(?P<pk>\d+)/$', self.banner_mini_update_view.as_view(), name='banner-mini-update'),
+            url(r'^delete-banner-mini/(?P<pk>\d+)/$', self.banner_mini_delete_view.as_view(),
+                name='banner-mini-delete'),
+            url(r'^update-banner-mini/(?P<pk>\d+)/$', self.banner_mini_update_view.as_view(),
+                name='banner-mini-update'),
             url(r'^view-banner-mini/(?P<pk>\d+)/$', self.banner_mini_detail_view.as_view(), name='banner-mini-detail'),
 
             url(r'^endorsement/$', self.endorsement_list_view.as_view(), name='endorsement-list'),
             url(r'^create-endorsement/$', self.endorsement_create_view.as_view(), name='endorsement-create'),
-            url(r'^delete-endorsement/(?P<pk>\d+)/$', self.endorsement_delete_view.as_view(), name='endorsement-delete'),
-            url(r'^update-endorsement/(?P<pk>\d+)/$', self.endorsement_update_view.as_view(), name='endorsement-update'),
+            url(r'^delete-endorsement/(?P<pk>\d+)/$', self.endorsement_delete_view.as_view(),
+                name='endorsement-delete'),
+            url(r'^update-endorsement/(?P<pk>\d+)/$', self.endorsement_update_view.as_view(),
+                name='endorsement-update'),
             url(r'^view-endorsement/(?P<pk>\d+)/$', self.endorsement_detail_view.as_view(), name='endorsement-detail'),
+
+            url(r'^seo-footer/$', self.seo_footer_list_view.as_view(), name='seo-footer-list'),
+            url(r'^create-seo-footer/$', self.seo_footer_create_view.as_view(), name='seo-footer-create'),
+            url(r'^delete-seo-footer/(?P<pk>\d+)/$', self.seo_footer_delete_view.as_view(),
+                name='seo-footer-delete'),
+            url(r'^update-seo-footer/(?P<pk>\d+)/$', self.seo_footer_update_view.as_view(),
+                name='seo-footer-update'),
+            url(r'^view-seo-footer/(?P<pk>\d+)/$', self.seo_footer_detail_view.as_view(), name='seo-footer-detail'),
         ]
         return self.post_process_urls(urls)
 

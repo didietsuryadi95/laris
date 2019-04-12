@@ -1208,6 +1208,7 @@ var oscar = (function (o, $) {
             o.uiAnimate.floatButton();
             o.uiAnimate.onOpenCategory();
             o.uiAnimate.onCopy();
+            o.uiAnimate.readMoreSeo();
             if ($(window).width() < 980) {
                 // o.uiAnimate.mobileCategory();
                 o.uiAnimate.onFilterCategory();
@@ -1215,6 +1216,19 @@ var oscar = (function (o, $) {
             }
             o.uiAnimate.removeAlert();
             let defaultHeight = $(window).height();
+        },
+        readMoreSeo: function () {
+            $("#read-more-seo").click(function (e) {
+                e.preventDefault();
+                let element = $("#about > article");
+                if (!element.hasClass("active")) {
+                    element.addClass("active");
+                    $(this).text("Tutup");
+                } else {
+                    element.removeClass("active");
+                    $(this).text("Selengkapnya ...");
+                }
+            })
         },
         removeAlert: function () {
             if (!$("#messages").parents(".gdn-cart-alert").length && $("#messages").children().length > 0) {

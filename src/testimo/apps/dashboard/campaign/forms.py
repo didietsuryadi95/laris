@@ -10,6 +10,7 @@ from oscar.core.loading import get_model
 Banner = get_model('campaign', 'Banner')
 BannerMini = get_model('campaign', 'BannerMini')
 Endorsement = get_model('campaign', 'Endorsement')
+SeoFooter = get_model('campaign', 'SeoFooter')
 
 
 class PictureWidget(widgets.ImageInput):
@@ -150,6 +151,13 @@ class EndorsementForm(forms.ModelForm):
         return super(EndorsementForm, self).save(*args, **kwargs)
 
 
+class SeoFooterForm(forms.ModelForm):
+
+    class Meta:
+        model = SeoFooter
+        fields = ['title', 'content']
+
+
 class BannerSearchForm(forms.Form):
     title = forms.CharField(required=False, label=_("Title"))
 
@@ -159,4 +167,8 @@ class BannerMiniSearchForm(forms.Form):
 
 
 class EndorsementSearchForm(forms.Form):
+    name = forms.CharField(required=False, label=_("Title"))
+
+
+class SeoFooterSearchForm(forms.Form):
     name = forms.CharField(required=False, label=_("Title"))

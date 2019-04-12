@@ -1,0 +1,25 @@
+{% extends 'dashboard/layout.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Seo Footer" %} '{{ txn.title }}' | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+   <ul class="breadcrumb">
+        <li><a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a></li>
+        <li>{% trans "Contents" %}</li>
+       <li><a href="{% url 'dashboard:seo-footer-list' %}">{% trans "Seo Footer" %}</a></li>
+        <li class="active">'{{ txn.title }}'</li>
+    </ul>
+{% endblock %}
+
+{% block dashboard_content %}
+    <table class="table table-striped table-bordered">
+        <tbody>
+            <tr><th>{% trans "Title" %}</th><td>{{ txn.title }}</td></tr>
+            <tr><th>{% trans "Contents" %}</th><td>{{ txn.content|safe }}</td></tr>
+        </tbody>
+    </table>
+    <a href="{% url 'dashboard:seo-footer-list' %}" class="btn btn-primary">&laquo; {% trans "Back" %}</a>
+{% endblock dashboard_content %}

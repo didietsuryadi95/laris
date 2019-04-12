@@ -537,6 +537,10 @@ OSCAR_DASHBOARD_NAVIGATION = [
                 'label': _('Endorsement'),
                 'url_name': 'dashboard:endorsement-list',
             },
+{
+                'label': _('Seo Footer'),
+                'url_name': 'dashboard:seo-footer-list',
+            },
 
         ],
     },

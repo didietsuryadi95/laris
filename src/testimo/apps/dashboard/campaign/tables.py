@@ -7,6 +7,7 @@ DashboardTable = get_class('dashboard.tables', 'DashboardTable')
 Banner = get_model('campaign', 'Banner')
 BannerMini = get_model('campaign', 'BannerMini')
 Endorsement = get_model('campaign', 'Endorsement')
+SeoFooter = get_model('campaign', 'SeoFooter')
 
 
 class BannerTable(DashboardTable):
@@ -65,3 +66,17 @@ class EndorsementTable(DashboardTable):
         fields = ('name', 'image', 'sort_priority', 'valid_from', 'valid_until', 'published')
         sequence = ('name', 'image', 'sort_priority', 'valid_from', 'valid_until', 'published')
         order_by = 'sort_priority'
+
+
+class SeoFooterTable(DashboardTable):
+    title = LinkColumn('dashboard:seo-footer-update', args=[A('pk')])
+    actions = TemplateColumn(
+        verbose_name=_('Actions'),
+        template_name='dashboard/seo_footer/seo_footer_row_actions.html',
+        orderable=False)
+
+    class Meta(DashboardTable.Meta):
+        model = SeoFooter
+        fields = ('title', 'date_created', 'date_updated', )
+        sequence = ('title', 'date_created', 'date_updated', )
+        order_by = 'date_updated'

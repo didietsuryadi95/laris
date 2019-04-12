@@ -17,6 +17,7 @@
     {% get_banner_mini as banner_mini %}
     {% get_endorsements as endorsements %}
     {% get_highlight_products as products %}
+    {% get_seo_footer as seo %}
 
     <div class="gdn-page gdn-page-home">
         <div class="d-block">
@@ -34,9 +35,9 @@
             {% include "partials/home-testimonial.html" with data=endorsements %}
         </div>
 
-        {#        <div class="container">#}
-        {#            {% include "partials/home-about.html" %}#}
-        {#        </div>#}
+        <div class="container">
+            {% include "partials/home-about.html" with data=seo %}
+        </div>
 
 
         {% include "partials/home-navbar.html" %}

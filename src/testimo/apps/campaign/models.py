@@ -345,3 +345,13 @@ class Endorsement(TimesStampedModel):
 
 
 post_delete.connect(file_cleanup, sender=Endorsement, dispatch_uid='Endorsement.file_cleanup')
+
+
+class SeoFooter(TimesStampedModel):
+    title = models.CharField(_("Title"), max_length=200)
+    content = models.TextField(_("Content"), blank=True)
+
+    class Meta:
+        verbose_name = _('Seo Footer')
+        verbose_name_plural = _('Seo Footers')
+        ordering = ['-date_created', ]
