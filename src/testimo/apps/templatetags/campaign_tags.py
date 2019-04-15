@@ -66,4 +66,4 @@ def get_highlight_products():
 
 @register.simple_tag()
 def get_seo_footer():
-    return SeoFooter.objects.all().order_by('-date_created')
+    return SeoFooter.objects.all().order_by('date_created')
