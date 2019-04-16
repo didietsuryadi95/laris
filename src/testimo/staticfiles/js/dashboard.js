@@ -162,6 +162,7 @@ var oscar = (function (o, $) {
                 }else{
                     destination_range.hide();
                     label_destination_range.hide();
+                    destination_range_id.val('').trigger('change');
                     destination_range_id.prop('required', false);
                 }
             });

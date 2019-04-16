@@ -5,9 +5,10 @@ from django.db import models
 from django.urls import reverse
 from django.utils.html import strip_tags
 from django.db.models.signals import post_save
+from django.core.cache import cache
 
 from django.utils.translation import ugettext_lazy as _
-from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductImage
+from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductImage, AbstractCategory
 from django.core.exceptions import ValidationError
 from apps.templatetags.api_tags import get_oss_presigned_url
 
@@ -192,6 +193,16 @@ class ProductImage(AbstractProductImage):
         if self.oss_image:
             return get_oss_presigned_url(self.oss_image, settings.PRODUCT_IMAGE_STYLE)
         return ''
+
+
+class Category(AbstractCategory):
+    def get_absolute_url(self):
+        cache_key = self.get_url_cache_key()
+        url = reverse(
+            'catalogue:category',
+            kwargs={'category_slug': self.full_slug, 'pk': self.pk})
+        cache.set(cache_key, url)
+        return url
 
 
 from oscar.apps.catalogue.models import *

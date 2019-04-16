@@ -1,6 +1,7 @@
 from django.db.models.query import Q
 from oscar.apps.offer.abstract_models import AbstractConditionalOffer as CoreAbstractConditionalOffer, \
-    AbstractBenefit as CoreAbstractBenefit, AbstractCondition as CoreAbstractCondition, AbstractRange as CoreAbstractRange
+    AbstractBenefit as CoreAbstractBenefit, AbstractCondition as CoreAbstractCondition, \
+    AbstractRange as CoreAbstractRange
 from django.db import models
 from oscar.models import fields
 from django.utils.translation import ugettext_lazy as _
@@ -103,6 +104,60 @@ class Condition(CoreAbstractCondition):
 
 
 class Range(CoreAbstractRange):
+    def add_product(self, product, display_order=None):
+        """ Add product to the range
+        When adding product that is already in the range, prevent re-adding it.
+        If display_order is specified, update it.
+        Default display_order for a new product in the range is 0; this puts
+        the product at the top of the list.
+        """
+        initial_order = display_order or 0
+        RangeProduct = get_model('offer', 'RangeProduct')
+        product_model = get_model("catalogue", "Product")
+        relation, __ = RangeProduct.objects.get_or_create(
+            range=self, product=product,
+            defaults={'display_order': initial_order})
+        if product.is_parent:
+            product_child = product_model.objects.filter(parent=product)
+            for child in product_child:
+                RangeProduct.objects.get_or_create(
+                    range=self, product=child,
+                    defaults={'display_order': initial_order})
+        elif product.is_child:
+            RangeProduct.objects.get_or_create(
+                range=self, product=product.parent,
+                defaults={'display_order': initial_order})
+        if (display_order is not None and
+            relation.display_order != display_order):
+            relation.display_order = display_order
+            relation.save()
+        # Remove product from excluded products if it was removed earlier and
+        # re-added again, thus it returns back to the range product list.
+        if product.id in self._excluded_product_ids():
+            self.excluded_products.remove(product)
+            self.invalidate_cached_ids()
+
+    def remove_product(self, product):
+        """
+        Remove product from range. To save on queries, this function does not
+        check if the product is in fact in the range.
+        """
+        RangeProduct = get_model('offer', 'RangeProduct')
+        product_model = get_model("catalogue", "Product")
+        if product.is_parent:
+            RangeProduct.objects.filter(range=self, product__in=product_model.objects.filter(parent=product)).delete()
+        elif product.is_child:
+            if len(RangeProduct.objects.filter(range=self,
+                                               product__in=product_model.objects.filter(parent=product.parent))) == 1:
+                RangeProduct.objects.filter(range=self, product=product.parent).delete()
+        RangeProduct.objects.filter(range=self, product=product).delete()
+        # Making sure product will be excluded from range products list by adding to
+        # respective field. Otherwise, it could be included as a product from included
+        # category or etc.
+        self.excluded_products.add(product)
+        # Invalidating cached property value with list of IDs of already excluded products.
+        self.invalidate_cached_ids()
+
     def all_products(self):
         """
         Return a queryset containing all the products in the range
@@ -124,8 +179,8 @@ class Range(CoreAbstractRange):
             Q(product_class_id__in=self._class_ids()) |
             Q(productcategory__category_id__in=self._category_ids())
         ).exclude(
-            Q(id__in=self._excluded_product_ids()) |
-            Q(structure=product_model.PARENT)
+            Q(id__in=self._excluded_product_ids())
         ).distinct()
+
 
 from oscar.apps.offer.models import *  # noqa isort:skip

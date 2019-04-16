@@ -3,11 +3,16 @@ from django.utils.translation import ugettext_lazy as _
 from django_tables2 import SingleTableView
 from django.http import HttpResponseRedirect
 
+from oscar.core.utils import slugify
 from oscar.core.loading import get_classes, get_model
 from oscar.apps.wishlists.models import Line
 from oscar.apps.dashboard.catalogue.views import ProductLookupView as OriginalProductLookupView
 from oscar.apps.dashboard.catalogue.views import ProductDeleteView as ProductCustomDeleteView
 from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as ProductCreateUpdateViewCustom
+from oscar.apps.dashboard.catalogue.views import CategoryUpdateView as OriginalCategoryUpdateView
+
+from .tasks import handle_update_category_product
+
 
 (ProductForm,
  ProductClassSelectForm,
@@ -216,3 +221,21 @@ class ProductCreateUpdateView(ProductCreateUpdateViewCustom):
         self.object.save()
 
         return HttpResponseRedirect(self.get_success_url())
+
+
+class CategoryUpdateView(OriginalCategoryUpdateView):
+    def get_success_url(self):
+        category = Category.objects.get(id=self.object.id)
+        category.slug = slugify(category.name)
+        category.save()
+        category.ensure_slug_uniqueness()
+        product_category = ProductCategory.objects.filter(category_id=category.id,
+                                                          product__product_class_id__isnull=False).last()
+        if product_category:
+            product_class = product_category.product.product_class
+            product_class.name = category.name
+            product_class.slug = category.slug
+            product_class.save()
+
+        handle_update_category_product.delay(category.id)
+        return super(CategoryUpdateView, self).get_success_url()

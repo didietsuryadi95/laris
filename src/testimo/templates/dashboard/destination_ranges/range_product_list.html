@@ -99,9 +99,9 @@
                         </thead>
                         <tbody class="product_list">
                         {% for product in products %}
-                            <tr id="product_{{ product.pk }}">
+                            <tr id="product_{{ product.pk|stringformat:"i" }}">
                                 <td>
-                                    <input type="checkbox" name="selected_product" value="{{ product.id }}" />
+                                    <input type="checkbox" name="selected_product" value="{{ product.id|stringformat:"i" }}" />
                                 </td>
                                 <td>{{ product.upc|default:"-" }}</td>
                                 <td><a href="{% url 'dashboard:catalogue-product' pk=product.id %}">{{ product.get_title }}</a></td>
