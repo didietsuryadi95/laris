@@ -229,13 +229,6 @@ class CategoryUpdateView(OriginalCategoryUpdateView):
         category.slug = slugify(category.name)
         category.save()
         category.ensure_slug_uniqueness()
-        product_category = ProductCategory.objects.filter(category_id=category.id,
-                                                          product__product_class_id__isnull=False).last()
-        if product_category:
-            product_class = product_category.product.product_class
-            product_class.name = category.name
-            product_class.slug = category.slug
-            product_class.save()
 
         handle_update_category_product.delay(category.id)
         return super(CategoryUpdateView, self).get_success_url()
