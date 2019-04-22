@@ -21,6 +21,13 @@ log_host: "logs.gramedia.com"
 log_port: "13302"
 log_handler: "graypy.GELFHandler"
 
+#APM Service
+apm_name: "{{ app_full_name }}"
+apm_name_fe: "{{ app_full_name }}-Frontend"
+apm_url: "https://apm.gramedia.info:8200"
+apm_pass: "{{ vault_apm_pass }}"
+apm_name_from_route: "True"
+
 #CELERY
 celery_loglevel: CRITICAL
 days_complete: 14
@@ -97,5 +104,10 @@ app_vars:
     - { name: MCHIMP_LIST_ID, value: "{{ mchimp_list }}"}
     - { name: DAYS_COMPLETE, value: "{{ days_complete }}"}
     - { name: HOSTNAME, value: "https://{{ http_hostname }}/"}
+    - { name: APM_NAME, value: "{{ apm_name }}"}
+    - { name: APM_NAME_FE, value: "{{ apm_name_fe }}"}
+    - { name: APM_URL, value: "{{ apm_url }}"}
+    - { name: APM_PASS, value: "{{ apm_pass }}"}
+    - { name: NAME_FROM_ROUTE, value: "{{ apm_name_from_route }}"}
 
 letsencrypt_email: devops@gramedia.digital
