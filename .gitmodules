@@ -1,6 +1,3 @@
-[submodule "deploy/roles/apps/newrelic"]
-	path = deploy/roles/apps/newrelic
-	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-newrelic
 [submodule "deploy/roles/apps/rabbitmq"]
 	path = deploy/roles/apps/rabbitmq
 	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-rabbitmq
@@ -28,3 +25,6 @@
 [submodule "deploy/roles/common/ubuntu-bionic"]
 	path = deploy/roles/common/ubuntu-bionic
 	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-common-ubuntu-bionic
+[submodule "deploy/roles/common/elastic-beat"]
+	path = deploy/roles/common/elastic-beat
+	url = gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Operations/ansible-role-common-elastic-beat-client

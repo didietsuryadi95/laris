@@ -73,7 +73,7 @@
     mode: 0600
   when: app_role != "production"
 
-- name: Deploy pypi pre release
-  copy:
-    content: "{{pypi_pre}}"
-    dest: /etc/pip.conf
+# - name: Deploy pypi pre release
+#   copy:
+#     content: "{{pypi_pre}}"
+#     dest: /etc/pip.conf

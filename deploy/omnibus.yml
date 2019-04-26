@@ -38,6 +38,13 @@
     - role: apps/submodule
       when: app_role == "vagrant"
     - role: common/ubuntu-bionic
+    - role: common/elastic-beat
+      auth_pass: "{{ authbasic_pass }}"
+      http_check: "{{ http_hostname }}"
+      space_id: "bhisma"
+      db_host: "{{ tes_db_host }}"
+      db_name: "{{ app_user }}"
+      when: app_role == "production"
     - role: apps/python
     - role: apps/nginx
       use_brotli: "True"
@@ -59,8 +66,6 @@
           dir_path: '{{ workdir }}/static'
         - http_path: '/uploads'
           dir_path: '{{ workdir }}/uploads'
-    - role: apps/newrelic
-      when: app_role == "production"
   become: yes
 
 # Docs Server

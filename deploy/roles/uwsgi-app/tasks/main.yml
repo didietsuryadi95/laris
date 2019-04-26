@@ -11,12 +11,6 @@
 
 - include: register-emperor-vassel.yml
 
-################
-# newrelic APM #
-################
-- include : deploy-newrelic-config.yml
-  when : (app_role == "production")
-
 #########
 # Nginx #
 #########

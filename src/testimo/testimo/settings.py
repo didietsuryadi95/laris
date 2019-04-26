@@ -79,7 +79,9 @@ INSTALLED_APPS = [
     'apps.dashboard.destination_ranges',
     'apps.partner_api',
     'apps',
-    'meta'
+    'meta',
+    #APM Service
+    'elasticapm.contrib.django'
 ] + get_core_apps([
     'apps.address',
     'apps.basket',
@@ -118,6 +120,15 @@ FIXTURE_DIRS = (
     os.path.join(BASE_DIR, '../../fixtures'),
 )
 
+#Elastic APM settings
+ELASTIC_APM = {
+   'SERVICE_NAME': env.string('APM_NAME', 'django-app'),
+   'SERVER_URL' : env.string('APM_URL', 'http://localhost'),
+   'DEBUG': True,
+   'SECRET_TOKEN': env.string('APM_PASS', ''),
+   'DJANGO_TRANSACTION_NAME_FROM_ROUTE': env.boolean('NAME_FROM_ROUTE', True),
+}
+
 # Application definition
 
 
@@ -126,6 +137,8 @@ SITE_ID = 1
 AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
+    #Elastic APM middleware
+    'elasticapm.contrib.django.middleware.TracingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -170,6 +183,17 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        #Elastic APM Loging
+        'elasticapm': {
+            'level': 'WARNING',
+            'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
+        },
+        #For APM loggers
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
         },
         'graylog': {
             'level': logging.DEBUG if DEBUG else logging.INFO,
@@ -220,15 +244,21 @@ LOGGING = {
     },
     'loggers': {
         'testimo': {
-            'handlers': ['app', 'mail_admins'],
+            'handlers': ['app', 'mail_admins', 'elasticapm'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'oscar.core': {
-            'handlers': ['app', 'mail_admins'],
+            'handlers': ['app', 'mail_admins', 'elasticapm'],
             'level': 'DEBUG',
             'propagate': True,
-        }
+        },
+        # Log errors from the Elastic APM module to the console (recommended)
+        'elasticapm.errors': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
     },
 }
 
@@ -264,6 +294,8 @@ TEMPLATES = [
                 'oscar.apps.customer.notifications.context_processors.notifications',
                 'oscar.core.context_processors.metadata',
                 'testimo.context_processors.global_settings',
+                #Elastic APM Template
+                'elasticapm.contrib.django.context_processors.rum_tracing',
             ],
         },
     },
@@ -598,6 +630,10 @@ SOCIAL_INSTAGRAM = 'https://www.instagram.com/testimo_bysb/'
 SOCIAL_FACEBOOK = ''
 SOCIAL_TWITTER = ''
 SOCIAL_YOUTUBE = ''
+
+#APM Variable Frontend
+APM_URL = env.string('APM_URL', '')
+APM_NAME_FE = env.string('APM_NAME_FE', '')
 
 NEW_FLAG_PRODUCT_PERIOD = 30  # days
 

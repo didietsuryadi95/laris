@@ -103,6 +103,19 @@
     });
 </script>
 
+<!--script>
+$(function () {
+    elasticApm.init({
+        serviceName: "{{ APM_NAME_FE }}",
+        serverUrl: "{{ APM_URL }}",
+        pageLoadTraceId: "{{ apm.trace_id }}",
+        pageLoadSpanId: "{{ apm.span_id }}",
+        pageLoadSampled: "{{ apm.is_sampled_js }}",
+        distributedTracingOrigins: ['*']
+    });
+});
+</script-->
+
 {# Page meta-data - this is populated by the 'metadata' template context processor #}
 </body>
 </html>

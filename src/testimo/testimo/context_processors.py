@@ -54,7 +54,10 @@ def global_settings(request):
         'IMG_LOGO': getattr(settings, 'DEFAULT_IMAGE_LOGO', ''),
         'CONTACT_NUMBER': getattr(settings, 'PARTNER_PHONE_NUMBER', ''),
         'CONTACT_WHATSAPP': getattr(settings, 'PARTNER_WHATSAPP_NUMBER', ''),
-        'CONTACT_EMAIL': getattr(settings, 'PARTNER_EMAIL', '')
+        'CONTACT_EMAIL': getattr(settings, 'PARTNER_EMAIL', ''),
+        #Variable for APM frontend agent js-base
+        'APM_NAME_FE': getattr(settings, 'APM_NAME_FE', None),
+        'APM_URL': getattr(settings, 'APM_URL', None)
 
     }
 
