@@ -1,5 +1,5 @@
 ---
-http_hostname: www.testimobysb.com
-domains: testimobysb.com
+http_hostname: www.laris.com
+domains: laris.com
 is_local_dev: no
 app_role: production

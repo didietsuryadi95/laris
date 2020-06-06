@@ -1,6 +1,6 @@
 ---
 - hosts:
-    - testimo-omnibus
+    - laris-omnibus
 
   vars_files:
     - environments/vault_vars.yml
@@ -31,7 +31,7 @@
 
 #NewRelic configuration
     newrelic_write_logfile: True #True And False
-    app_full_name: "Bhisma-Testimo" #Display Application Name Newrelic
+    app_full_name: "Bhisma-Laris" #Display Application Name Newrelic
 
 #roles active
   roles:

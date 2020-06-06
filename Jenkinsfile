@@ -35,7 +35,7 @@ pipeline
 
 //Stage Develop
 
-        stage('Ansible Deploy to dev-testimo.gramedia.io [Develop]')
+        stage('Ansible Deploy to dev-laris.gramedia.io [Develop]')
         {
             when
             {
@@ -63,7 +63,7 @@ pipeline
 
 //Stage Staging
 
-        stage('Ansible Deploy to staging.testimobysb.com [Staging]')
+        stage('Ansible Deploy to staging.laris.com [Staging]')
         {
             when
             {
@@ -91,7 +91,7 @@ pipeline
 
 //Stage Production
 
-        stage('Ansible Deploy to testimobysb.com [Production]')
+        stage('Ansible Deploy to laris.com [Production]')
         {
             when
             {
@@ -108,7 +108,7 @@ pipeline
                 def cmd = """
                 PIPE=\$(mktemp -u);
                 mkfifo \$PIPE;
-                (echo '${testimo}' >\$PIPE &);
+                (echo '${laris}' >\$PIPE &);
                 ansible-playbook ./deploy/omnibus.yml -i ./deploy/environments/production --extra-vars 'repo_ref=${branch_name}' --private-key=~/.ssh/bhisma_id_rsa --vault-password-file=\$PIPE || (
                 RC=\$?;
                 rm \$PIPE;

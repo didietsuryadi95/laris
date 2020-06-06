@@ -1,8 +1,8 @@
 ---
-app_name: testimo
+app_name: laris
 app_user: "{{ app_name }}"
 
-repo: gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Bisma/testimo
+repo: gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Bisma/laris
 repo_version: master
 
 py_version: 3.6

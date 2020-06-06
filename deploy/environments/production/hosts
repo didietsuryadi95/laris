@@ -1,5 +1,5 @@
-[testimo-omnibus:children]
-testimo-omnibus-servers
+[laris-omnibus:children]
+laris-omnibus-servers
 
-[testimo-omnibus-servers]
+[laris-omnibus-servers]
 149.129.251.40 ansible_private_key=~/.ssh/bhisma_id_rsa host_key_checking=False ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3

@@ -6,12 +6,12 @@ services:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=p@ssw0rd24
-      - POSTGRES_USER=testimo
-      - POSTGRES_DB=testimo
+      - POSTGRES_USER=laris
+      - POSTGRES_DB=laris
     ports:
       - 5432:5432
     volumes:
-      - ../testimo-data:/var/lib/postgresql/data
+      - ../laris-data:/var/lib/postgresql/data
 
   #solr
   solr:
@@ -19,11 +19,11 @@ services:
     ports:
       - "8983:8983"
     volumes:
-      - ./solr-core/testimo:/opt/solr/server/solr/mycores/testimo
+      - ./solr-core/laris:/opt/solr/server/solr/mycores/laris
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - testimo
+      - laris
   memcached:
     image: memcached
     ports:

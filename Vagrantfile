@@ -26,13 +26,13 @@ Vagrant.configure("2") do |config|
         ansible.extra_vars = {
             is_local_dev: true,
             http_hostname: "localhost",
-            app_name: "testimo",
+            app_name: "laris",
             app_user: "{{ app_name }}",
             vault_tes_db_pass: "p@ssw0rd24",
             vault_tes_db_host: "localhost",
             app_role: "vagrant",
 
-            repo: "gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Bisma/testimo",
+            repo: "gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Bisma/laris",
             # repo: "gramediadigital@vs-ssh.visualstudio.com:v3/gramediadigital/Bisma/tes-web",
             repo_version: "master",
 

@@ -166,15 +166,15 @@ fabric.properties
 .idea/httpRequests
 search_index.whoosh/
 
-src/testimo/static/*
-src/testimo/static/
-src/testimo/static/.gitkeep
+src/laris/static/*
+src/laris/static/
+src/laris/static/.gitkeep
 
 
-!src/testimo/uploads/.gitkeep
-!src/testimo/uploads/image_not_found.png
-src/testimo/uploads/*
-src/testimo/uploads/
+!src/laris/uploads/.gitkeep
+!src/laris/uploads/image_not_found.png
+src/laris/uploads/*
+src/laris/uploads/
 
 logs/*
 !logs/.gitkeep
@@ -184,5 +184,5 @@ logs/*
 
 node_modules
 
-solr-core/testimo/data/*
-src/testimo/posactivate
+solr-core/laris/data/*
+src/laris/posactivate

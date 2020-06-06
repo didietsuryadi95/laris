@@ -1,7 +1,7 @@
 TESTIMO
 =======
 
-A [django-oscar](http://oscarcommerce.com/) app for handling Testimo devices (specifically 
+A [django-oscar](http://oscarcommerce.com/) app for handling Laris devices (specifically 
 in a marketplace deployment). 
 
 This app must be installed with oscar in order to be used.

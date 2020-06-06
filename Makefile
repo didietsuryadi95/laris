@@ -7,7 +7,7 @@ upload:
 
 
 clean:
-	pip3 uninstall --yes testimo
+	pip3 uninstall --yes laris
 	rm -fR .cache/ .eggs/  build/ dist/ *.egg-info MANIFEST static reports
 
 

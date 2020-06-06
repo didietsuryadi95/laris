@@ -2,7 +2,7 @@
 [
     {
     "action": ["replace_files"],
-    "value": "testimobysb.com",
+    "value": "laris.com",
     "variable": "domain_name",
     "target": ["settings"]
   },
@@ -14,7 +14,7 @@
   },
   {
     "action": ["replace_files"],
-    "value": "TestimoBySB.com",
+    "value": "LarisBySB.com",
     "variable": "shop_tag_line",
     "target": ["html", "settings"]
   },
@@ -86,7 +86,7 @@
   },
   {
     "action": ["replace_files"],
-    "value":  "https://www.instagram.com/testimo_bysb/",
+    "value":  "https://www.instagram.com/laris_bysb/",
     "variable": "instagram",
     "target": ["settings"]
   },
@@ -200,7 +200,7 @@
   },
   {
     "action": ["replace_files", "change_folder_name"],
-    "value": "testimo",
+    "value": "laris",
     "variable": "app_name",
     "target": ["settings", "folder"]
   },

@@ -1,0 +1,6 @@
+{% load currency_filters i18n %}
+{% load staticfiles %}
+{% load function_tags %}
+
+LarisBySB.com - Pesanan {{order_number|stringformat:"s"}} Telah Dibatalkan
+

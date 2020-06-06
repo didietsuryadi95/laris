@@ -1,3 +1,0 @@
-{% load currency_filters i18n %}
-{% load staticfiles %}
-TestimoBySB.com - Konfirmasi Pembayaran untuk Pesanan  {{order.number|stringformat:"s"}}

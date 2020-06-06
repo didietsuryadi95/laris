@@ -1,5 +1,5 @@
-[testimo-omnibus:children]
-testimo-omnibus-servers
+[laris-omnibus:children]
+laris-omnibus-servers
 
-[testimo-omnibus-servers]
-dev-testimo.gramedia.io ansible_private_key=~/.ssh/id_rsa host_key_checking=False ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3
+[laris-omnibus-servers]
+dev-laris.gramedia.io ansible_private_key=~/.ssh/id_rsa host_key_checking=False ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,17 @@
+{% load i18n %}
+
+
+<div class="search-box">
+    <form id="frm-search" method="get" action="{% url 'search:search' %}">
+        <div class="input-group search">
+            <input name="q" type="text" class="form-control" autocomplete="off" id="input-search"
+                   placeholder="Cari Produk Laris">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-white search-button" style="margin:0;" type="submit"
+                        value="{% trans "Search" %}">
+                    <i class="search-icon fa ion-ios-search-strong text-grey"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
